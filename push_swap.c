@@ -6,28 +6,11 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 19:58:27 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/09/16 00:31:47 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/09/16 21:37:25 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int	check_passed_vals(char *str)
-{
-	int	i;
-
-	printf("string: %s\n", str);
-	i = 0;
-	if (str[i] == 0) // can be compared to '\0' as well
-		return (1);
-	while (str[i] != '\0')
-	{
-		if (!ft_isdigit(str[i]) && !ft_atoi(&str[i]))
-			return (1);
-		i++;
-	}
-	return 0;
-}
 
 int main(int argc, char *argv[])
 {
@@ -60,8 +43,10 @@ int main(int argc, char *argv[])
 				{
 					if (check_passed_vals(split[j]))
 					{
+						ft_putstr_fd("\x1b[1;31m", STDERR_FILENO);
+						ft_putstr_fd("Error\n", STDERR_FILENO);
 						ft_putstr_fd("Contains value that is not a number", STDERR_FILENO);
-						// need to free splitted vals;
+						printf("\x1B[0m\n");
 						ft_free(split);
 						system("leaks a.out");
 						return 0;
@@ -71,11 +56,11 @@ int main(int argc, char *argv[])
 			}
 			else if (check_passed_vals(argv[i]))
 			{
+				ft_putstr_fd("\x1b[1;31m", STDERR_FILENO);
+				ft_putstr_fd("Error\n", STDERR_FILENO);
 				ft_putstr_fd("Contains value that is not a number", STDERR_FILENO);
-				// free nodes in stack_a too before freeing the queue
-				// but I think it's not needed here as the program exits succesfully and frees the memory itself
-				// free(stack_a);
-				// system("leaks a.out");
+				printf("\x1B[0m\n");
+				free(stack_a);
 				return 0;
 			}
 			if (split)
@@ -86,44 +71,31 @@ int main(int argc, char *argv[])
 					enqueue(stack_a, ft_atoi(split[j]));
 					j++;
 				}
-				ft_free(split);
-				split = NULL;
+				split = ft_free(split);
 			}
 			else
 				enqueue(stack_a, ft_atoi(argv[i]));
 			i++;
 		}
 	}
+	if (check_duplicates(stack_a))
+	{
+		ft_putstr_fd("\x1b[1;31m", STDERR_FILENO);
+		ft_putstr_fd("Error\n", STDERR_FILENO);
+		printf("*************************************************************************\n");
+		printf("**************************** Duplicates found ***************************\n");
+		printf("*************************************************************************");
+		printf("\x1B[0m\n");
+		if (split)
+			ft_free(split);
+		system("leaks a.out");
+		return 0;
+	}
+	ft_putstr_fd("\n\n\x1b[1;32m", STDERR_FILENO);
+	ft_putstr_fd("Hurray!! No errors, at least for now.", STDERR_FILENO);
+	printf("\x1B[0m\n\n\n");
 	ft_putstr_fd("Items in queue\n", STDOUT_FILENO);
 	display(stack_a);
-	// swap_a(stack_a);
-	// rotate_a(stack_a);
-	// printf("________________________ After swap_a fxn and rotate() call ____________________\n\n");
-	// display(stack_a);
-	// push_b(stack_a, stack_b);
-	// push_b(stack_a, stack_b);
-	// push_b(stack_a, stack_b);
-	// push_b(stack_a, stack_b);
-	// printf("________________________ Second stack ____________________\n\n");
-	// print_stack(stack_b);
-	// printf("________________________ Pushing back to stack a ________________\n\n");
-	// push_a(stack_b, stack_a);
-	// display(stack_a);
-	// print_stack(stack_b);
-	// rrotate_b(stack_b);
-	// printf("________________________ After rotate_b() ________________\n\n");
-	// print_stack(stack_b);
-
-	// printf("________________________ After reversing both a and b ________________\n\n");
-	// reverse_a_b(stack_a, stack_b);
-	// display(stack_a);
-	// print_stack(stack_b);
-	// swap_a_b(stack_a, stack_b);
-	// printf("________________________ After swap_a () and swap_b() ________________\n\n");
-	// display(stack_a);
-	// print_stack(stack_b);
-
-
 	// this is like an algo to use swap_a()
 /* 	if (stack_a->size > 1)
 	{

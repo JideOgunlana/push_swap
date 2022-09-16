@@ -88,4 +88,12 @@ void	swap_a_b(t_queue *stack_a, t_stack *stack_b);
 void	rotate_a_b(t_queue *stack_a, t_stack *stack_b);
 void	reverse_a_b(t_queue *stack_a, t_stack *stack_b);
 
+/*
+====================================================================
+			push swap operations on both stacks
+====================================================================
+*/
+int	check_passed_vals(char *str);
+int	check_duplicates(t_queue *stack_a);
+
 # endif
