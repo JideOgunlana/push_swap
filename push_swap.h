@@ -33,7 +33,6 @@ typedef struct s_stack
 	t_stack_node	*s_nodes;
 }				t_stack;
 
-
 /*
 ====================================================================
 			                stack B                                 

@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 19:58:27 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/09/16 21:37:25 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/09/19 00:13:56 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,44 +94,115 @@ int main(int argc, char *argv[])
 	ft_putstr_fd("\n\n\x1b[1;32m", STDERR_FILENO);
 	ft_putstr_fd("Hurray!! No errors, at least for now.", STDERR_FILENO);
 	printf("\x1B[0m\n\n\n");
-	ft_putstr_fd("Items in queue\n", STDOUT_FILENO);
+	ft_putstr_fd("Items in STACK A\n\n", STDOUT_FILENO);
 	display(stack_a);
-	// this is like an algo to use swap_a()
-/* 	if (stack_a->size > 1)
+	printf("\n");
+
+	// Creating a simple algorithm to
+	// understand how to sort a
+	// small set of data with STACK A & STACK B
+	// This algo. works with 3 to 4 elements in STACK 
+
+	// dividing STACK A into a smaller (into half)
+	// and passing the remaining half to STACK B
+	if (stack_a->size >= 3 && stack_a->size <= 4)
 	{
-		t_queue_node *head;
-		int	median = stack_a->size / 2;
-		int	i;
+		t_queue_node	*head;
+		int				median;
+		int				count;
 
-		i = 0;
 		head = stack_a->front;
-		while (head  && i < median)
+		median = stack_a->size / 2;
+		count = 0;
+		
+		while (head && count < median)
 		{
-			if (stack_a->front->item > stack_a->front->next->item)
-				swap_a(stack_a);
+			push_b(stack_a, stack_b);
 			head = head->next;
-			i++;
+			count++;
 		}
-	} */
+	}
+	int	step1 = 1;
+	int	step2 = 1;
+	int	step3 = 1;
+	if (stack_a->size <= 2 && stack_b->size <= 2)
+	{
+		while (step1 || step2 || step3)
+		{
+			printf("Elements in STACK A:\n");
+			display(stack_a);
+			print_stack(stack_b);
+			// check elements in STACK B if any operation
+			// should be carried out to sort this half
 
-	swap_a(stack_a);
-	display(stack_a);
-	push_b(stack_a, stack_b);
-	push_b(stack_a, stack_b);
-	// push_b(stack_a, stack_b);
-	print_stack(stack_b);
-	// rotate_a_b(stack_a, stack_b); // Not needed as it takes more moves
-	// reverse_a_b(stack_a, stack_b);
-	print_stack(stack_b);
-	swap_a(stack_a);
-	// printf("Stack size: %d\n", stack_b->size);
-	push_a(stack_b, stack_a);
-	push_a(stack_b, stack_a);
-	push_a(stack_b, stack_a);
-	printf("________________________ Example ________________\n\n");
+			if (stack_b->size > 1)
+			{
+				if (stack_b->s_nodes->item < stack_b->s_nodes->next->item)
+				{
+					swap_b(stack_b);
+					step1 = 1;
+				}
+				else
+				{
+					step1 = 0;
+				}
+			}
+			// Comparing top elements in both stacks
+			if (stack_a->size > 1 && stack_b->size > 1)
+			{
+				if (stack_a->front->item < stack_b->s_nodes->item)
+				{
+					push_a(stack_b, stack_a);
+					swap_a(stack_a);
+					push_b(stack_a, stack_b);
+					step2 = 1;
+				}
+				else
+				{
+					step2 = 0;
+				}
+			}
 
+			// check elements in STACK A if any operation
+			// should be carried out to sort this half
+			if (stack_a->size > 1)
+			{
+				if (stack_a->front->item > stack_a->front->next->item)
+				{
+					swap_a(stack_a);
+					step3 = 1;
+				}
+				else
+				{
+					step3 = 0;
+				}
+			}
+		}
+	}
+
+	// After sorting both stacks push back elements in stack B into stack A
+	i = 0;
+	while (i <= stack_b->size)
+	{
+		push_a(stack_b, stack_a);
+		i++;
+	}
+	printf(" ******************************************************************\n");
+ft_putstr_fd("\n\x1b[1;32m", STDERR_FILENO);
+printf("\t\t                               \n");
+printf("\t\t           :::      ::::::::   \n");
+printf("\t\t         :+:      :+:    :+:   \n");
+printf("\t\t       +:+ +:+         +:+     \n");
+printf("\t\t     +#+  +:+       +#+        \n");
+printf("\t\t   +#+#+#+#+#+   +#+           \n");
+printf("\t\t        #+#    #+#             \n");
+printf("\t\t       ###   ########.hn  \n");
+printf("\x1B[0m\n");
+printf(" \n******************************************************************\n");
+
+	printf("Elements in STACK A:\n");
 	display(stack_a);
-	
-	system("leaks a.out");
+	print_stack(stack_b);
+	// system("leaks a.out");
 	return 0;
 }

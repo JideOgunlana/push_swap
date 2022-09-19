@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 18:37:59 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/09/15 18:53:53 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/09/17 19:19:31 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,6 @@ void	push_a(t_stack *stack_b, t_queue *stack_a)
 		return ;
 	lst = (t_list **) &stack_a->front;
 	ft_lstadd_front(lst, removed_node);
+	stack_a->size++;
 	ft_putstr_fd("pa\n", STDOUT_FILENO);
 }

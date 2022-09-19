@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 18:41:30 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/09/15 22:51:16 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/09/17 17:24:53 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,8 @@
 
 void	swap_a(t_queue *stack_a)
 {
-	// t_queue_node	*head;
 	t_queue_node	*first;
 	t_queue_node	*second;
-
-	// int		first;
-	// int		second;
 
 	if (stack_a->size < 2)
 		return ;
@@ -29,16 +25,10 @@ void	swap_a(t_queue *stack_a)
 	stack_a->front = second;
 	stack_a->front->next = first;
 	ft_putstr_fd("sa\n", STDOUT_FILENO);
-	// head = q->front;
-	// first = head->item;
-	// second = head->next->item;
-	// head->item = second;
-	// head->next->item = first;
 }
 
 void	rotate_a(t_queue *stack_a)
 {
-	// t_list	*head;
 	t_list	**lst;
 	t_list	*first;
 
@@ -48,7 +38,6 @@ void	rotate_a(t_queue *stack_a)
 	first->next = NULL; // Makes sure the first element now points to null when added to the back and not to the new first item in the stack
 	stack_a->back = (t_queue_node *) first;
 	lst = (t_list **) &stack_a->front;
-	// head = *lst;
 	ft_lstadd_back(lst, first);
 	stack_a->size++;
 	ft_putstr_fd("ra\n", STDOUT_FILENO);
