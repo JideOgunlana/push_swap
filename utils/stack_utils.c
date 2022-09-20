@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 18:36:27 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/09/15 22:53:29 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/09/19 15:41:24 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ void	print_stack(t_stack *s)
 	t_stack_node *head;
 
 	head = s->s_nodes;
-	printf("Elements in stack B:\n");
+	printf("\nElements in stack B:\n");
+	if (is_empty(s))
+		printf("Stack B is empty\n");
 	while (head != NULL)
 	{
 		printf("%d\n", head->item);

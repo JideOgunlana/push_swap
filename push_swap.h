@@ -14,11 +14,12 @@ typedef struct s_queue_node
 
 typedef struct s_queue
 {
-    int     size;
-    t_queue_node  *node;
-    t_queue_node  *front;
-    t_queue_node  *back;
-    t_queue_node  *before_back;
+	int				size;
+	int				least_item;
+	t_queue_node	*node;
+	t_queue_node	*front;
+	t_queue_node	*back;
+	t_queue_node	*before_back;
 }               t_queue;
 
 typedef struct s_stack_node

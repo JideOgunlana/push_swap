@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 19:58:27 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/09/19 00:13:56 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/09/20 17:13:37 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,119 +88,156 @@ int main(int argc, char *argv[])
 		printf("\x1B[0m\n");
 		if (split)
 			ft_free(split);
-		system("leaks a.out");
+		// system("leaks a.out");
 		return 0;
 	}
 	ft_putstr_fd("\n\n\x1b[1;32m", STDERR_FILENO);
 	ft_putstr_fd("Hurray!! No errors, at least for now.", STDERR_FILENO);
 	printf("\x1B[0m\n\n\n");
-	ft_putstr_fd("Items in STACK A\n\n", STDOUT_FILENO);
+
+
+
+	printf(" ******************************************************************\n");
+	ft_putstr_fd("\n\x1b[1;32m", STDERR_FILENO);
+	printf("\t\t                               \n");
+	printf("\t\t           :::      ::::::::   \n");
+	printf("\t\t         :+:      :+:    :+:   \n");
+	printf("\t\t       +:+ +:+         +:+     \n");
+	printf("\t\t     +#+  +:+       +#+        \n");
+	printf("\t\t   +#+#+#+#+#+   +#+           \n");
+	printf("\t\t        #+#    #+#             \n");
+	printf("\t\t       ###   ########.hn  \n");
+	printf("\x1B[0m\n");
+	printf(" \n******************************************************************\n");
+
 	display(stack_a);
-	printf("\n");
+	printf("Size of stack A: %d\n", stack_a->size);
+	printf("Least Element of stack A: %d\n", stack_a->least_item);
+	// Algorithm to sort Array of numbers goes here
+	int				first_num_position;
+	int				second_num_position;
+	int				num_position;
+	int				move_couts;
+	t_queue_node	*head;
+	// int				median;
 
-	// Creating a simple algorithm to
-	// understand how to sort a
-	// small set of data with STACK A & STACK B
-	// This algo. works with 3 to 4 elements in STACK 
 
-	// dividing STACK A into a smaller (into half)
-	// and passing the remaining half to STACK B
-	if (stack_a->size >= 3 && stack_a->size <= 4)
+	head = stack_a->front;
+	first_num_position = 0;
+	second_num_position = 0;
+	num_position = 0;
+	move_couts = 0;
+	
+	if (stack_a->size >= 10 && stack_a->size <= 100)
 	{
-		t_queue_node	*head;
-		int				median;
-		int				count;
+		int	*chunks;
 
-		head = stack_a->front;
-		median = stack_a->size / 2;
-		count = 0;
-		
-		while (head && count < median)
-		{
-			push_b(stack_a, stack_b);
-			head = head->next;
-			count++;
-		}
+		chunks = (int *) malloc(stack_a->size / 4);
 	}
-	int	step1 = 1;
-	int	step2 = 1;
-	int	step3 = 1;
-	if (stack_a->size <= 2 && stack_b->size <= 2)
+	while (head)
 	{
-		while (step1 || step2 || step3)
+		// median = stack_a->size / 2;
+		if (head->item >= stack_a->least_item
+			&& head->item <= stack_a->least_item + 4
+			)
 		{
-			printf("Elements in STACK A:\n");
-			display(stack_a);
-			print_stack(stack_b);
-			// check elements in STACK B if any operation
-			// should be carried out to sort this half
-
-			if (stack_b->size > 1)
+			// if (!first_num_position)
+			// {
+				// first_num_position = num_position;
+				// head = head->next;
+				// while (head)
+				// {
+				// 	num_position++;
+				// 	if (head->item >= stack_a->least_item
+				// 	&& head->item <= stack_a->least_item + 4
+				// 	)
+				// 	{
+				// 		second_num_position = num_position;
+				// 		break ;
+				// 	}
+				// 	head = head->next;
+				// }
+			// }
+			if (first_num_position)
 			{
-				if (stack_b->s_nodes->item < stack_b->s_nodes->next->item)
+				second_num_position = num_position;
+				if (first_num_position > (stack_a->size - second_num_position + 1))
 				{
-					swap_b(stack_b);
-					step1 = 1;
+					int	repeat = stack_a->size - second_num_position + 1;
+					int	rr_count = 0;
+					while (rr_count < repeat)
+					{
+						rrotate_a(stack_a);
+						rr_count++;
+						move_couts++;
+					}
+					push_b(stack_a, stack_b);
+					move_couts++;
 				}
-				else
+				else if (first_num_position < (stack_a->size - second_num_position + 1))
 				{
-					step1 = 0;
+					int	repeat = first_num_position;
+					int	r_count = 0;
+					while (r_count < repeat)
+					{
+						rotate_a(stack_a);
+						r_count++;
+						move_couts++;
+					}
+					push_b(stack_a, stack_b);
+					move_couts++;
 				}
-			}
-			// Comparing top elements in both stacks
-			if (stack_a->size > 1 && stack_b->size > 1)
-			{
-				if (stack_a->front->item < stack_b->s_nodes->item)
+				else if (first_num_position == (stack_a->size - second_num_position + 1)
+						&& first_num_position <= 1
+				)
 				{
-					push_a(stack_b, stack_a);
 					swap_a(stack_a);
 					push_b(stack_a, stack_b);
-					step2 = 1;
+					int	repeat = first_num_position;
+					int	rr_count = 0;
+					while (rr_count < repeat)
+					{
+						rrotate_a(stack_a);
+						rr_count++;
+						move_couts++;
+					}
+					push_b(stack_a, stack_b);
+					move_couts += 2;
 				}
 				else
 				{
-					step2 = 0;
+					int	repeat = first_num_position;
+					int	r_count = 0;
+					while (r_count < repeat)
+					{
+						rotate_a(stack_a);
+						r_count++;
+						move_couts++;
+					}
+					push_b(stack_a, stack_b);
+					move_couts++;
 				}
+				printf("Element in front of stack A is now: %d\n", stack_a->front->item);
+				first_num_position = second_num_position - move_couts;
+				num_position = first_num_position - 1;
+				move_couts = 0;
+				break ;
 			}
-
-			// check elements in STACK A if any operation
-			// should be carried out to sort this half
-			if (stack_a->size > 1)
+			if (!first_num_position && !second_num_position)
 			{
-				if (stack_a->front->item > stack_a->front->next->item)
-				{
-					swap_a(stack_a);
-					step3 = 1;
-				}
-				else
-				{
-					step3 = 0;
-				}
+				first_num_position = num_position;
 			}
 		}
+		num_position++;
+		head = head->next;
 	}
+	printf("head is at position: %d\n", num_position);
+	printf("First number is at position: %d\n", first_num_position);
+	printf("Second num is at position: %d\n", second_num_position);
+	
 
-	// After sorting both stacks push back elements in stack B into stack A
-	i = 0;
-	while (i <= stack_b->size)
-	{
-		push_a(stack_b, stack_a);
-		i++;
-	}
-	printf(" ******************************************************************\n");
-ft_putstr_fd("\n\x1b[1;32m", STDERR_FILENO);
-printf("\t\t                               \n");
-printf("\t\t           :::      ::::::::   \n");
-printf("\t\t         :+:      :+:    :+:   \n");
-printf("\t\t       +:+ +:+         +:+     \n");
-printf("\t\t     +#+  +:+       +#+        \n");
-printf("\t\t   +#+#+#+#+#+   +#+           \n");
-printf("\t\t        #+#    #+#             \n");
-printf("\t\t       ###   ########.hn  \n");
-printf("\x1B[0m\n");
-printf(" \n******************************************************************\n");
-
-	printf("Elements in STACK A:\n");
+	ft_putstr_fd("\n\x1b[1;33m", STDERR_FILENO);
+	printf("\nAfter applying sorting algorithm, We've got:\x1B[0m\n");
 	display(stack_a);
 	print_stack(stack_b);
 	// system("leaks a.out");

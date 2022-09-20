@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 18:33:50 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/09/15 22:52:19 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/09/19 16:24:27 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,15 @@ void    enqueue(t_queue *stack_a, int val)
     {
         stack_a->front = added_node;
         stack_a->back = added_node;
+        stack_a->least_item = stack_a->front->item;
     }
     else
     {
 		stack_a->before_back = stack_a->back;
         stack_a->back->next = added_node;
         stack_a->back = added_node;
+        if (stack_a->back->item < stack_a->least_item)
+            stack_a->least_item = stack_a->back->item;
     }
     stack_a->size++;
 }
@@ -72,6 +75,7 @@ void    display(t_queue *stack_a)
     if (stack_a->size == 0)
         return ;
     head = stack_a->front;
+    printf("\nElements in Stack A\n");
     while (head)
     {
         printf("%d\n", head->item);
