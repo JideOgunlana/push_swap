@@ -6,65 +6,13 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 19:58:27 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/09/21 21:45:10 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/09/22 21:15:55 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	insertion_sort(t_queue	*stack_a)
-{
-	t_queue_node	*head;
-	int				*arr;
-	int				median;
-
-	head = stack_a->front;
-	arr = (int *) malloc(sizeof(stack_a->size));
-	// arr = (int *) malloc(sizeof(3));
-	if (!arr)
-		return 0;
-	int	i;
-
-	i = 0;
-	while (head /* && (i < 3) */)
-	{
-		arr[i] = head->item;
-		head = head->next;
-		i++;
-	}
-
-	int step;
-    int j;
-    int key;
-
-    step = 1;
-    while (step < stack_a->size)
-    {
-        key = arr[step];
-        j = step - 1;
-        while (key < arr[j] && j >= 0)
-        {
-            arr[j + 1] = arr[j];
-            j--;
-        }
-        arr[j + 1] = key;
-        step++;
-    }
-
-	i = 0;
-	printf("Sorted Array:\n");
-	while(i < stack_a->size)
-	{
-		printf("%d\n", arr[i]);
-		i++;
-	}
-	median = arr[stack_a->size/ 2];
-	free(arr);
-	return median;
-}
-
-
-int	insertion_sort_on_b(t_stack	*stack_b)
+/* int	insertion_sort_on_b(t_stack	*stack_b)
 {
 	t_stack_node	*head;
 	int				*arr;
@@ -115,9 +63,162 @@ int	insertion_sort_on_b(t_stack	*stack_b)
 	return median;
 }
 
+ */
+/* 
+	Insertion sort program sorts the numbers in Stack A 
+	to realise the median.
+
+	The median value is used to determine which numbers
+	for a given chunk should be pushed to Stack B
+
+ */
+int	insertion_sort(t_queue	*stack_a)
+{
+	t_queue_node	*head;
+	int				*arr;
+	int				median;
+
+	head = stack_a->front;
+	arr = (int *) malloc(sizeof(int) * stack_a->size);
+	// arr = (int *) malloc(sizeof(3));
+	if (!arr)
+		return 0;
+	int	i;
+
+	i = 0;
+	while (head != NULL/* && (i < 3) */)
+	{
+		arr[i] = head->item;
+		head = head->next;
+		i++;
+	}
+
+	int step;
+    int j;
+    int key;
+
+    step = 1;
+    while (step < stack_a->size)
+    {
+        key = arr[step];
+        j = step - 1;
+        while (key < arr[j] && j >= 0)
+        {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        arr[j + 1] = key;
+        step++;
+    }
+
+	i = 0;
+	/* 
+		Printing the sorted array created with insertion sort
+	 */
+	// printf("Sorted Array:\n");
+	// while(i < stack_a->size)
+	// {
+	// 	printf("%d\n", arr[i]);
+	// 	i++;
+	// }
+	median = arr[stack_a->size/ 2];
+	free(arr);
+	return median;
+}
 
 
-// 
+/*
+	Algorithm to sort Array of numbers goes here
+*/
+ 
+ /// int				first_num_position;
+// int				second_num_position;
+// int				num_position;
+// int				move_couts;
+// t_queue_node	*head;
+
+void	sort_stacks(t_queue *stack_a, t_stack *stack_b)
+{
+	int		median;
+	median = insertion_sort(stack_a);
+	t_queue_node *head_a;
+	t_stack_node *head_b;
+	head_a = stack_a->front;
+	int head_a_moves = 0;
+	int	head_b_rotate_moves = 0;
+	int	head_b_reverse_moves = 0;
+	// int	found_val = 0;
+	while (head_a)
+	{
+		if (head_a->item < median)
+		{
+			while (head_a_moves > 0)
+			{
+				rotate_a(stack_a);
+				head_a_moves--;
+			}
+			if (stack_b->size == 0)
+			{
+				push_b(stack_a, stack_b);
+			}
+			else if (stack_b->size > 0)
+			{
+				head_b = stack_b->s_nodes;
+				while (head_b)
+				{
+					if (head_a->item > head_b->item)
+					{
+						head_b_rotate_moves++;
+					}
+					else if (head_a->item < head_b->item && head_b_rotate_moves > 0)
+					{
+						head_b_reverse_moves++;
+					}
+					head_b = head_b->next;
+				}
+				if (!head_b_rotate_moves && !head_b_reverse_moves)
+				{
+					push_b(stack_a, stack_b);
+				}
+				else if (head_b_rotate_moves && !head_b_reverse_moves)
+				{
+					push_b(stack_a, stack_b);
+					head_b_rotate_moves = stack_b->size - head_b_rotate_moves;
+					while (head_b_rotate_moves > 0)
+					{
+						rotate_b(stack_b);
+						head_b_rotate_moves--;
+					}
+				}
+				else if (head_b_rotate_moves && head_b_reverse_moves)
+				{
+					// print_stack(stack_b);
+					while (head_b_reverse_moves > 0)
+					{
+						rrotate_b(stack_b);
+						head_b_reverse_moves--;
+					}
+					push_b(stack_a, stack_b);
+					// rotate_b(stack_b);
+					head_b_rotate_moves = stack_b->size - head_b_rotate_moves;
+					while (head_b_rotate_moves > 0)
+					{
+						rotate_b(stack_b);
+						head_b_rotate_moves--;
+					}
+				}
+				head_b_rotate_moves = 0;
+				head_b_reverse_moves = 0;
+			}
+			head_a_moves = -1;
+		}
+		head_a = head_a->next;
+		head_a_moves++;
+	}
+}
+
+
+
 int main(int argc, char *argv[])
 {
 	t_queue	*stack_a;
@@ -125,7 +226,7 @@ int main(int argc, char *argv[])
 	char	**split;
 	int		i;
 	int		j;
-	int		median;
+	// int		median;
 
 	split = NULL;
 	if (argc < 2)
@@ -198,12 +299,19 @@ int main(int argc, char *argv[])
 		// system("leaks a.out");
 		return 0;
 	}
-	ft_putstr_fd("\n\n\x1b[1;32m", STDERR_FILENO);
+
+	/* 
+		Fun Message
+	 */
+/* 	ft_putstr_fd("\n\n\x1b[1;32m", STDERR_FILENO);
 	ft_putstr_fd("Hurray!! No errors, at least for now.", STDERR_FILENO);
-	printf("\x1B[0m\n\n\n");
+	printf("\x1B[0m\n\n\n"); */
 
 
-
+	/* 
+		Fun printing of 42 Logo
+	 */
+/* 
 	printf(" ******************************************************************\n");
 	ft_putstr_fd("\n\x1b[1;32m", STDERR_FILENO);
 	printf("\t\t                               \n");
@@ -216,35 +324,27 @@ int main(int argc, char *argv[])
 	printf("\t\t       ###   ########.hn  \n");
 	printf("\x1B[0m\n");
 	printf(" \n******************************************************************\n");
+*/
+
+
+/* 
+	Show the stack before the algorithm to sort it is applied
+ */
+/* 
 
 	display(stack_a);
 	printf("Size of stack A: %d\n", stack_a->size);
 	printf("Least Element of stack A: %d\n", stack_a->least_item);
-	// Algorithm to sort Array of numbers goes here
-	// int				first_num_position;
-	// int				second_num_position;
-	// int				num_position;
-	// int				move_couts;
-	// t_queue_node	*head;
-	median = insertion_sort(stack_a);
-	t_queue_node *head;
-	head = stack_a->front;
-	int head_moves = 0;
-	// int	found_val = 0;
-	while (head)
+*/
+	
+	while (stack_a->size > 1)
 	{
-		if (head->item < median)
-		{
-			while (head_moves > 0)
-			{
-				rotate_a(stack_a);
-				head_moves--;
-			}
-			push_b(stack_a, stack_b);
-			head_moves = -1;
-		}
-		head = head->next;
-		head_moves++;
+		sort_stacks(stack_a, stack_b);
+	}
+	while (stack_b->size != 0)
+	{
+		rrotate_b(stack_b);
+		push_a(stack_b, stack_a);
 	}
 	// while(stack_a->size > 3)
 	// {
@@ -260,12 +360,16 @@ int main(int argc, char *argv[])
 	// }
 	// printf("Median value: %d\n", median); 
 
-	
 
+/* 
+	Show the Ordered Stacks After applying the sorting algorithm
+ */
+/*
 	ft_putstr_fd("\n\x1b[1;33m", STDERR_FILENO);
 	printf("\nAfter applying sorting algorithm, We've got:\x1B[0m\n");
 	display(stack_a);
-	print_stack(stack_b);
+	print_stack(stack_b); 
+*/
 	// while(stack_b->size > 3)
 	// {
 	// 	median = insertion_sort_on_b(stack_b);
@@ -281,6 +385,6 @@ int main(int argc, char *argv[])
 
 	// display(stack_a);
 	// print_stack(stack_b);
-	system("leaks a.out");
+	// system("leaks a.out");
 	return 0;
 }

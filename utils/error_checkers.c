@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 21:28:21 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/09/16 21:36:21 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/09/22 21:11:48 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	check_passed_vals(char *str)
 {
 	int	i;
 
-	printf("[ERROR_CHECKERS.C] string: %s\n", str);
+	// printf("[ERROR_CHECKERS.C] string: %s\n", str);
 	i = 0;
 	if (str[i] == '\0')
 		return (1);
