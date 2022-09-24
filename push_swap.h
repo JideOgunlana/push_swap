@@ -5,7 +5,13 @@
 # include "../libft/libft.h"
 # include "../gnl/get_next_line.h"
 
-// Defining structs for queue structure and node the queue uses
+
+/*
+====================================================================
+   Defining structs for queue structure and node the queue uses
+====================================================================
+*/
+
 typedef struct s_queue_node
 {
     int             item;
@@ -33,6 +39,17 @@ typedef struct s_stack
 	int				size;
 	t_stack_node	*s_nodes;
 }				t_stack;
+
+/*
+====================================================================
+			Chunks sent to Stack B
+====================================================================
+*/
+typedef struct s_chunks
+{
+	int	key;
+	int	data;
+}				t_chunks;
 
 /*
 ====================================================================
@@ -95,5 +112,7 @@ void	reverse_a_b(t_queue *stack_a, t_stack *stack_b);
 */
 int	check_passed_vals(char *str);
 int	check_duplicates(t_queue *stack_a);
+
+
 
 # endif
