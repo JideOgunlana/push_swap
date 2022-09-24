@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 19:58:27 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/09/22 21:15:55 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/09/24 14:24:54 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,60 @@
 	for a given chunk should be pushed to Stack B
 
  */
+
+int	is_ordered(t_queue *stack_a)
+{
+	t_queue_node	*head;
+	int				*arr;
+	int				i;
+
+	head = stack_a->front;
+	arr = (int *) malloc(sizeof(int) * stack_a->size);
+	// arr = (int *) malloc(sizeof(3));
+	if (!arr)
+		return 0;
+
+	i = 0;
+	while (head != NULL/* && (i < 3) */)
+	{
+		arr[i] = head->item;
+		head = head->next;
+		i++;
+	}
+
+	int step;
+    int j;
+    int key;
+
+    step = 1;
+    while (step < stack_a->size)
+    {
+        key = arr[step];
+        j = step - 1;
+        while (key < arr[j] && j >= 0)
+        {
+            arr[j + 1] = arr[j];
+            j--;
+			return (0);
+        }
+        arr[j + 1] = key;
+        step++;
+    }
+
+	// i = 0;
+	/* 
+		Printing the sorted array created with insertion sort
+	 */
+	// printf("Sorted Array:\n");
+	// while(i < stack_a->size)
+	// {
+	// 	printf("%d\n", arr[i]);
+	// 	i++;
+	// }
+	free(arr);
+	return (1);
+}
+
 int	insertion_sort(t_queue	*stack_a)
 {
 	t_queue_node	*head;
@@ -111,7 +165,7 @@ int	insertion_sort(t_queue	*stack_a)
         step++;
     }
 
-	i = 0;
+	// i = 0;
 	/* 
 		Printing the sorted array created with insertion sort
 	 */
@@ -308,25 +362,6 @@ int main(int argc, char *argv[])
 	printf("\x1B[0m\n\n\n"); */
 
 
-	/* 
-		Fun printing of 42 Logo
-	 */
-/* 
-	printf(" ******************************************************************\n");
-	ft_putstr_fd("\n\x1b[1;32m", STDERR_FILENO);
-	printf("\t\t                               \n");
-	printf("\t\t           :::      ::::::::   \n");
-	printf("\t\t         :+:      :+:    :+:   \n");
-	printf("\t\t       +:+ +:+         +:+     \n");
-	printf("\t\t     +#+  +:+       +#+        \n");
-	printf("\t\t   +#+#+#+#+#+   +#+           \n");
-	printf("\t\t        #+#    #+#             \n");
-	printf("\t\t       ###   ########.hn  \n");
-	printf("\x1B[0m\n");
-	printf(" \n******************************************************************\n");
-*/
-
-
 /* 
 	Show the stack before the algorithm to sort it is applied
  */
@@ -336,15 +371,23 @@ int main(int argc, char *argv[])
 	printf("Size of stack A: %d\n", stack_a->size);
 	printf("Least Element of stack A: %d\n", stack_a->least_item);
 */
-	
-	while (stack_a->size > 1)
+	printf("%d : returned val from ordered\n", is_ordered(stack_a));
+	if (is_ordered(stack_a))
 	{
-		sort_stacks(stack_a, stack_b);
+		printf("Stack A is already ordered\n");
+		return 0;
 	}
-	while (stack_b->size != 0)
+	else
 	{
-		rrotate_b(stack_b);
-		push_a(stack_b, stack_a);
+		while (stack_a->size > 1)
+		{
+			sort_stacks(stack_a, stack_b);
+		}
+		while (stack_b->size != 0)
+		{
+			rrotate_b(stack_b);
+			push_a(stack_b, stack_a);
+		}
 	}
 	// while(stack_a->size > 3)
 	// {
@@ -362,7 +405,7 @@ int main(int argc, char *argv[])
 
 
 /* 
-	Show the Ordered Stacks After applying the sorting algorithm
+	Show the Stacks After applying the sorting algorithm
  */
 /*
 	ft_putstr_fd("\n\x1b[1;33m", STDERR_FILENO);
