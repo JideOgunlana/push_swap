@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 19:58:27 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/09/26 22:34:04 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/09/29 19:28:30 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	insertion_sort_on_b(t_stack	*stack_b, int arr_size)
     {
         key = arr[step];
         j = step - 1;
-        while (key < arr[j] && j >= 0)
+        while (key > arr[j] && j >= 0)
         {
             arr[j + 1] = arr[j];
             j--;
@@ -56,13 +56,14 @@ int	insertion_sort_on_b(t_stack	*stack_b, int arr_size)
 		Printing the sorted array created with insertion sort
 	 */
 	// printf("Sorted Array:\n");
-	// while(i < stack_a->size)
+	// while(i < stack_b->size)
 	// {
 	// 	printf("%d\n", arr[i]);
 	// 	i++;
 	// }
 	median = arr[arr_size/ 2];
-	free(arr);
+	// free(arr);
+	// arr = NULL;
 	return median;
 }
 
@@ -129,7 +130,8 @@ int is_chunk_ordered(t_stack *stack_b, int chunk_size)
 		printf("%d\n", arr[i]);
 		i++;
 	}
-	free(arr);
+	// free(arr);
+	// arr = NULL;
 	return (1);
 }
 
@@ -182,7 +184,8 @@ int	is_ordered(t_queue *stack_a)
 	// 	printf("%d\n", arr[i]);
 	// 	i++;
 	// }
-	free(arr);
+	// free(arr);
+	// arr = NULL;
 	return (1);
 }
 
@@ -236,7 +239,8 @@ int	insertion_sort(t_queue	*stack_a)
 	// 	i++;
 	// }
 	median = arr[stack_a->size/ 2];
-	free(arr);
+	// free(arr);
+	// arr = NULL;
 	return median;
 }
 
@@ -253,17 +257,95 @@ int	insertion_sort(t_queue	*stack_a)
 
 // -1 2 3 4 10 11 12 13 14 15
 
+void	stack_b_has_two(t_queue *stack_a, t_stack *stack_b)
+{
+	int	k;
+
+	k = 0;
+	if (is_chunk_ordered(stack_b, 2))
+	{
+		printf("Chunk is ordered\n");
+		while (k < 2)
+		{
+			printf("Total elements in 1 chunk %d\n", 2);
+			push_a(stack_b, stack_a);
+			k++;
+		}
+	}
+	else
+	{
+		swap_b(stack_b);
+		while (k < 2)
+		{
+			push_a(stack_b, stack_a);
+			k++;
+		}
+		printf("Size of stack B is: %d\n", stack_b->size);
+	}
+}
+void	stack_b_has_three(t_queue *stack_a, t_stack *stack_b)
+{
+	int	median;
+	int	k;
+
+	k = 0;
+	median = insertion_sort_on_b(stack_b, 3);
+	if (!is_chunk_ordered(stack_b, 3))
+	{
+		if (stack_b->s_nodes->item == median)
+		{
+			if (stack_b->s_nodes->next->item > median)
+				swap_b(stack_b);
+			else
+				rrotate_b(stack_b);
+			while (k < stack_b->size)
+			{
+				push_a(stack_b, stack_a);
+				k++;
+			}
+		}
+		else if (stack_b->s_nodes->item < median)
+		{
+			rotate_b(stack_b);
+			if (stack_b->s_nodes->item == median)
+				swap_b(stack_b);
+			while (k < stack_b->size)
+			{
+				push_a(stack_b, stack_a);
+				k++;
+			}
+		}
+		else
+		{
+			push_a(stack_b, stack_a);
+			swap_b(stack_b);
+			while (k < stack_b->size)
+			{
+				push_a(stack_b, stack_a);
+				k++;
+			}
+		}
+	}
+	else
+	{
+		while (k < stack_b->size)
+		{
+			push_a(stack_b, stack_a);
+			k++;
+		}
+	}
+}
 void	move_chunks_to_b(t_queue *stack_a, t_stack *stack_b)
 {
 	int		median;
 	t_queue_node *head_a;
-	// t_stack_node *head_b;
+	int head_a_moves;
+
+	
 	median = insertion_sort(stack_a);
 	head_a = stack_a->front;
-	int head_a_moves = 0;
-	// int	head_b_rotate_moves = 0;
-	// int	head_b_reverse_moves = 0;
-	// int	found_val = 0;
+	head_a_moves = 0;
+
 	while (head_a)
 	{
 		if (head_a->item < median)
@@ -273,232 +355,70 @@ void	move_chunks_to_b(t_queue *stack_a, t_stack *stack_b)
 				rotate_a(stack_a);
 				head_a_moves--;
 			}
-			// if (stack_b->size == 0)
-			// {
-				push_b(stack_a, stack_b);
-			// }
-			// else if (stack_b->size > 0)
-			// {
-			// 	head_b = stack_b->s_nodes;
-			// 	while (head_b)
-			// 	{
-			// 		if (head_a->item > head_b->item)
-			// 		{
-			// 			head_b_rotate_moves++;
-			// 		}
-			// 		else if (head_a->item < head_b->item && head_b_rotate_moves > 0)
-			// 		{
-			// 			head_b_reverse_moves++;
-			// 		}
-			// 		head_b = head_b->next;
-			// 	}
-			// 	if (!head_b_rotate_moves && !head_b_reverse_moves)
-			// 	{
-			// 		push_b(stack_a, stack_b);
-			// 	}
-			// 	else if (head_b_rotate_moves && !head_b_reverse_moves)
-			// 	{
-			// 		push_b(stack_a, stack_b);
-			// 		head_b_rotate_moves = stack_b->size - head_b_rotate_moves;
-			// 		while (head_b_rotate_moves > 0)
-			// 		{
-			// 			rotate_b(stack_b);
-			// 			head_b_rotate_moves--;
-			// 		}
-			// 	}
-			// 	else if (head_b_rotate_moves && head_b_reverse_moves)
-			// 	{
-			// 		// print_stack(stack_b);
-			// 		while (head_b_reverse_moves > 0)
-			// 		{
-			// 			rrotate_b(stack_b);
-			// 			head_b_reverse_moves--;
-			// 		}
-			// 		push_b(stack_a, stack_b);
-			// 		// rotate_b(stack_b);
-			// 		head_b_rotate_moves = stack_b->size - head_b_rotate_moves;
-			// 		while (head_b_rotate_moves > 0)
-			// 		{
-			// 			rotate_b(stack_b);
-			// 			head_b_rotate_moves--;
-			// 		}
-			// 	}
-			// 	head_b_rotate_moves = 0;
-			// 	head_b_reverse_moves = 0;
-			// }
+			push_b(stack_a, stack_b);
 			head_a_moves = -1;
 		}
 		head_a = head_a->next;
 		head_a_moves++;
 	}
 }
+void	stack_b_has_chunks()
+{
+	
+}
+
 void	move_chunks_to_a(t_stack *stack_b, t_queue *stack_a, t_chunks **chunks, int total_chunks)
 {
-	// (void) chunks;
-	// (void) total_chunks;
-	// push_a(stack_b, stack_a);
-	// int j = 3;
-	// while (j > 0)
-	// {
-	// 	printf("Item to push: %d\n", stack_b->s_nodes->item);
-	// 	push_a(stack_b, stack_a);
-	// 	j--;
-	// }
 	int	median;
 
-	int k = 0;
+	print_stack(stack_b);
 	if (stack_b->size <= 2)
 	{
-		if (is_chunk_ordered(stack_b, chunks[total_chunks - 1]->data))
-		{
-			printf("Chunk is ordered\n");
-			while (k < chunks[total_chunks - 1]->data)
-			{
-				printf("Total elements in 1 chunk %d\n", chunks[total_chunks - 1]->data);
-				push_a(stack_b, stack_a);
-				k++;
-			}
-		}
-		else
-		{
-			swap_b(stack_b);
-			while (k < chunks[total_chunks - 1]->data)
-			{
-				push_a(stack_b, stack_a);
-				k++;
-			}
-			printf("Size of stack B is: %d\n", stack_b->size);
-		}
+		printf("\nSort ing stack B having only 2 or less items\n");
+		stack_b_has_two(stack_a, stack_b);
 	}
 	if (stack_b->size == 3)
 	{
-		median = insertion_sort_on_b(stack_b, 3);
-		if (!is_chunk_ordered(stack_b, 3))
-		{
-			if (stack_b->s_nodes->item == median)
-			{
-				if (stack_b->s_nodes->next->item > median)
-				{
-					swap_b(stack_b);
-				}
-				else
-				{
-					rrotate_b(stack_b);
-				}
-				while (k < stack_b->size)
-				{
-					push_a(stack_b, stack_a);
-					k++;
-				}
-			}
-			else if (stack_b->s_nodes->item < median)
-			{
-				rotate_b(stack_b);
-				if (stack_b->s_nodes->item == median)
-				{
-					swap_b(stack_b);
-				}
-				while (k < stack_b->size)
-				{
-					push_a(stack_b, stack_a);
-					k++;
-				}
-			}
-			else
-			{
-				push_a(stack_b, stack_a);
-				swap_b(stack_b);
-				while (k < stack_b->size)
-				{
-					push_a(stack_b, stack_a);
-					k++;
-				}
-			}
-		}
-		else
-		{
-			while (k < stack_b->size)
-			{
-				push_a(stack_b, stack_a);
-				k++;
-			}
-		}
+		printf("\nSort ing stack B having only 3 items\n");
+		stack_b_has_three(stack_a, stack_b);
 	}
 	if (stack_b->size > 3)
 	{
+		printf("\nSorting stack B having chunks\n");
+		printf("Total chunks: %d\n", total_chunks);
 		while (total_chunks > 0)
 		{
 			median = insertion_sort_on_b(stack_b, chunks[total_chunks - 1]->data);
-			printf("Median for chunks[%d]: %d\n",total_chunks - 1, median);
-			if (is_chunk_ordered(stack_b, chunks[total_chunks - 1]->data))
+			int chunk_size = chunks[total_chunks - 1]->data;
+			if (is_chunk_ordered(stack_b, chunk_size))
 			{
-				while (k < chunks[total_chunks - 1]->data)
+				while (chunk_size > 0)
 				{
 					push_a(stack_b, stack_a);
-					k++;
+					chunk_size--;
 				}
 			}
 			else
 			{
-				print_stack(stack_b);
-				exit(1);
+				printf("Chunk size is: %d\n\n", chunk_size);
+				if (chunk_size <= 2)
+				{
+					stack_b_has_two(stack_a, stack_b);
+				}
+				else if (chunk_size == 3)
+				{
+					stack_b_has_three(stack_a, stack_b);
+				}
+				else
+				{
+					printf("Chunk size is large\n");
+				}
 			}
 			total_chunks--;
 		}
+		
+		
 	}
-	/* int i = total_chunks - 1;
-	int		median;
-	while (i >= 0)
-	{
-		printf("Data here is: %d\n", chunks[i]->data);
-		if (is_chunk_ordered(stack_b, chunks[i]->data))
-		{
-			int j = chunks[i]->data;
-			while (j > 0)
-			{
-				printf("Item to push: %d\n", stack_b->s_nodes->item);
-				push_a(stack_b, stack_a);
-				j--;
-			}
-			display(stack_a);
-			// break ;
-		}
-		else
-		{
-			median = insertion_sort_on_b(stack_b, chunks[i]->data);
-			t_stack_node *head_b = stack_b->s_nodes;
-			int temp = head_b->item;
-			int	rotations = 0;
-			while (head_b && rotations < chunks[i]->data)
-			{
-				if (head_b->next != NULL)
-					head_b = head_b->next;
-				rotations++;
-				if (temp < head_b->item)
-				{
-					temp = head_b->item;
-					printf("*temp is: %d\n", temp);
-					while (rotations > 0)
-					{
-						rotate_b(stack_b);
-						rotations--;
-					}
-					// exit(1);
-				}
-				if (head_b->next == NULL)
-				{
-					push_a(stack_b, stack_a);
-					head_b = stack_b->s_nodes;
-					chunks[i]->data--;
-				}
-			}
-			print_stack(stack_b);
-			display(stack_a);
-			exit(1);
-			break ;
-		}
-		i--;
-	} */
 }
 
 t_chunks	*get_chunk_set(t_queue *stack_a, int set_count)
@@ -710,8 +630,9 @@ int main(int argc, char *argv[])
 			}
 		}
 		// Displays the two stacks A and B after creating chunks in B
-		display(stack_a);
-		print_stack(stack_b);
+		// display(stack_a);
+		// print_stack(stack_b);
+		printf("---------Moving items back to A--------\n");
 		while (stack_b->size > 0)
 		{
 			move_chunks_to_a(stack_b, stack_a, chunks, total_chunks);
