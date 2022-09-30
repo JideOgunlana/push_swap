@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 19:58:27 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/09/29 19:28:30 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/09/30 20:14:04 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -374,7 +374,7 @@ void	move_chunks_to_a(t_stack *stack_b, t_queue *stack_a, t_chunks **chunks, int
 	print_stack(stack_b);
 	if (stack_b->size <= 2)
 	{
-		printf("\nSort ing stack B having only 2 or less items\n");
+		printf("\nSorting stack B having only 2 or less items\n");
 		stack_b_has_two(stack_a, stack_b);
 	}
 	if (stack_b->size == 3)
@@ -412,6 +412,93 @@ void	move_chunks_to_a(t_stack *stack_b, t_queue *stack_a, t_chunks **chunks, int
 				else
 				{
 					printf("Chunk size is large\n");
+					print_stack(stack_b);
+					t_stack_node	*head_b;
+					int				rotations;
+					int				head_b_moves;
+					int				temp;
+					int				push_to_a_state;
+					int				pushed_items_count;
+
+					pushed_items_count = 0;
+					head_b = stack_b->s_nodes;
+					head_b_moves = 0;
+					rotations = 0;
+					while (chunks[total_chunks - 1]->data > 0)
+					{
+						push_to_a_state = 0;
+						printf("Head b item is: %d\n", head_b->item);
+						if (head_b->item < median && pushed_items_count < median + 1 && stack_b->s_nodes->item < median)
+						{
+							rotations++;
+							printf("Rotations: %d\n", rotations);
+						}
+						if (head_b->item < median && pushed_items_count >= median + 1
+							&& chunks[total_chunks - 1]->data > 1)
+						{
+							if (head_b->item < head_b->next->item)
+							{
+								if (head_b_moves > 0)
+								{
+									rotations += head_b_moves;
+								}
+							}
+						}
+						if (head_b->item > median)
+						{
+							temp = head_b->item;
+							if (temp < head_b->next->item)
+							{
+								temp = head_b->next->item;
+								rotations += head_b_moves;
+							}
+						}
+						if (head_b->item == median && pushed_items_count == median)
+						{
+							int	temp_rotations = rotations;
+							while (temp_rotations > 0)
+							{
+								rotate_b(stack_b);
+								temp_rotations--;
+							}
+							push_a(stack_b, stack_a);
+							chunks[total_chunks - 1]->data--;
+							pushed_items_count++;
+							while (rotations > 0)
+							{
+								rrotate_b(stack_b);
+								rotations--;
+							}
+							head_b = stack_b->s_nodes;
+							push_to_a_state = 1;
+							head_b_moves = 0;
+						}
+						if (head_b_moves == (chunks[total_chunks - 1]->data - 1))
+						{
+							int	temp_rotations = rotations;
+							while (temp_rotations > 0)
+							{
+								rotate_b(stack_b);
+								temp_rotations--;
+							}
+							push_a(stack_b, stack_a);
+							chunks[total_chunks - 1]->data--;
+							pushed_items_count++;
+							while (rotations > 0)
+							{
+								rrotate_b(stack_b);
+								rotations--;
+							}
+							head_b = stack_b->s_nodes;
+							push_to_a_state = 1;
+							head_b_moves = 0;
+						}
+						if (!push_to_a_state)
+						{
+							head_b = head_b->next;
+							head_b_moves++;
+						}
+					}
 				}
 			}
 			total_chunks--;
@@ -632,7 +719,8 @@ int main(int argc, char *argv[])
 		// Displays the two stacks A and B after creating chunks in B
 		// display(stack_a);
 		// print_stack(stack_b);
-		printf("---------Moving items back to A--------\n");
+		if (stack_b->size > 0)
+			printf("---------Moving items back to A--------\n");
 		while (stack_b->size > 0)
 		{
 			move_chunks_to_a(stack_b, stack_a, chunks, total_chunks);
