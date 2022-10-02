@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 19:58:27 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/09/30 20:14:04 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/02 02:06:35 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -298,7 +298,7 @@ void	stack_b_has_three(t_queue *stack_a, t_stack *stack_b)
 				swap_b(stack_b);
 			else
 				rrotate_b(stack_b);
-			while (k < stack_b->size)
+			while (k < 3)
 			{
 				push_a(stack_b, stack_a);
 				k++;
@@ -309,7 +309,7 @@ void	stack_b_has_three(t_queue *stack_a, t_stack *stack_b)
 			rotate_b(stack_b);
 			if (stack_b->s_nodes->item == median)
 				swap_b(stack_b);
-			while (k < stack_b->size)
+			while (k < 3)
 			{
 				push_a(stack_b, stack_a);
 				k++;
@@ -319,7 +319,7 @@ void	stack_b_has_three(t_queue *stack_a, t_stack *stack_b)
 		{
 			push_a(stack_b, stack_a);
 			swap_b(stack_b);
-			while (k < stack_b->size)
+			while (k < 2)
 			{
 				push_a(stack_b, stack_a);
 				k++;
@@ -328,13 +328,77 @@ void	stack_b_has_three(t_queue *stack_a, t_stack *stack_b)
 	}
 	else
 	{
-		while (k < stack_b->size)
+		while (k < 3)
 		{
 			push_a(stack_b, stack_a);
 			k++;
 		}
 	}
 }
+
+void	stack_b_has_three_chunks(t_queue *stack_a, t_stack *stack_b)
+{
+	int	median;
+	int	k;
+
+	k = 0;
+	median = insertion_sort_on_b(stack_b, 3);
+	if (!is_chunk_ordered(stack_b, 3))
+	{
+		if (stack_b->s_nodes->item == median)
+		{
+			if (stack_b->s_nodes->next->item > median)
+			{
+				swap_b(stack_b);
+				push_a(stack_b, stack_a);
+			}
+			else
+			{
+				rotate_b(stack_b);
+				swap_b(stack_b);
+				push_a(stack_b, stack_a);
+				rrotate_b(stack_b);
+			}
+			while (k < 2)
+			{
+				push_a(stack_b, stack_a);
+				k++;
+			}
+		}
+		else if (stack_b->s_nodes->item < median)
+		{
+			rotate_b(stack_b);
+			if (stack_b->s_nodes->item == median)
+				swap_b(stack_b);
+			while (k < 2)
+			{
+				push_a(stack_b, stack_a);
+				k++;
+			}
+			rrotate_b(stack_b);
+			push_a(stack_b, stack_a);
+		}
+		else
+		{
+			push_a(stack_b, stack_a);
+			swap_b(stack_b);
+			while (k < 2)
+			{
+				push_a(stack_b, stack_a);
+				k++;
+			}
+		}
+	}
+	else
+	{
+		while (k < 3)
+		{
+			push_a(stack_b, stack_a);
+			k++;
+		}
+	}
+}
+
 void	move_chunks_to_b(t_queue *stack_a, t_stack *stack_b)
 {
 	int		median;
@@ -412,49 +476,93 @@ void	move_chunks_to_a(t_stack *stack_b, t_queue *stack_a, t_chunks **chunks, int
 				else
 				{
 					printf("Chunk size is large\n");
-					print_stack(stack_b);
 					t_stack_node	*head_b;
 					int				rotations;
 					int				head_b_moves;
 					int				temp;
 					int				push_to_a_state;
 					int				pushed_items_count;
-
+					int				encountered_big_val;
+					int				chunk_mid_val;
 					pushed_items_count = 0;
 					head_b = stack_b->s_nodes;
 					head_b_moves = 0;
 					rotations = 0;
+					encountered_big_val = 0;
+					chunk_mid_val = chunks[total_chunks - 1]->data / 2;
+					
 					while (chunks[total_chunks - 1]->data > 0)
 					{
 						push_to_a_state = 0;
 						printf("Head b item is: %d\n", head_b->item);
-						if (head_b->item < median && pushed_items_count < median + 1 && stack_b->s_nodes->item < median)
+						if (chunks[total_chunks - 1]->data == 3 && stack_b->size != 3)
+						{
+							printf("Executing stack has 3\n");
+							printf("chunk size: %d\n", chunks[total_chunks - 1]->data);
+							stack_b_has_three_chunks(stack_a, stack_b);
+							break ;
+						}
+						if (stack_b->size == 3)
+						{
+							stack_b_has_three(stack_a, stack_b);
+							break ;
+						}
+						if (head_b->item <= median && pushed_items_count < chunk_mid_val && !encountered_big_val)
 						{
 							rotations++;
 							printf("Rotations: %d\n", rotations);
 						}
-						if (head_b->item < median && pushed_items_count >= median + 1
+						else if (head_b->item < median && pushed_items_count == chunk_mid_val)
+						{
+							rotations++;
+							printf("Rotations: %d\n", rotations);
+						}
+						if (head_b->item < median && pushed_items_count > chunk_mid_val
 							&& chunks[total_chunks - 1]->data > 1)
 						{
-							if (head_b->item < head_b->next->item)
+							temp = head_b->item;
+							while (head_b && head_b_moves < (chunks[total_chunks - 1]->data - 1))
 							{
-								if (head_b_moves > 0)
+								if (temp < head_b->next->item)
 								{
-									rotations += head_b_moves;
+									temp = head_b->next->item;
+									rotations = head_b_moves + 1;
 								}
+								head_b = head_b->next;
+								head_b_moves++;
 							}
+							// if (head_b->item < head_b->next->item)
+							// {
+							// 	if (head_b_moves > 0)
+							// 	{
+							// 		rotations += head_b_moves;
+							// 	}
+							// }
 						}
 						if (head_b->item > median)
 						{
+							printf("Encountered big val\n");
+							encountered_big_val = 1;
 							temp = head_b->item;
-							if (temp < head_b->next->item)
+							while (head_b && head_b_moves < (chunks[total_chunks - 1]->data - 1))
 							{
-								temp = head_b->next->item;
-								rotations += head_b_moves;
+								if (temp < head_b->next->item)
+								{
+									temp = head_b->next->item;
+									rotations = head_b_moves + 1;
+									// rotations += head_b_moves;
+									// rotations++;
+									// printf("head moves: %d\n", head_b_moves);
+									// printf("Rotations: %d\n", rotations);
+								}
+								head_b = head_b->next;
+								head_b_moves++;
 							}
+							printf("Rotations: %d\n", rotations);
 						}
-						if (head_b->item == median && pushed_items_count == median)
+						if (head_b->item == median && pushed_items_count == chunk_mid_val)
 						{
+							printf("Encountered Median\n");
 							int	temp_rotations = rotations;
 							while (temp_rotations > 0)
 							{
@@ -476,6 +584,7 @@ void	move_chunks_to_a(t_stack *stack_b, t_queue *stack_a, t_chunks **chunks, int
 						if (head_b_moves == (chunks[total_chunks - 1]->data - 1))
 						{
 							int	temp_rotations = rotations;
+							encountered_big_val = 0;
 							while (temp_rotations > 0)
 							{
 								rotate_b(stack_b);
