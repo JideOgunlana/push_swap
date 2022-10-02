@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 18:33:50 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/09/22 16:46:45 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/02 15:18:14 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_queue_node	*dequeue(t_queue *stack_a)
     }
     dequeued_node = stack_a->front;
     stack_a->front = stack_a->front->next;
-    // printf("Removed: %d\n", dequeued_node->item);
+    // // printf("Removed: %d\n", dequeued_node->item);
     stack_a->size--;
     return (dequeued_node);
 }

@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 19:58:27 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/02 02:06:35 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/02 20:00:17 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -465,11 +465,11 @@ void	move_chunks_to_a(t_stack *stack_b, t_queue *stack_a, t_chunks **chunks, int
 			else
 			{
 				printf("Chunk size is: %d\n\n", chunk_size);
-				if (chunk_size <= 2)
+				if (stack_b->size <= 2)
 				{
 					stack_b_has_two(stack_a, stack_b);
 				}
-				else if (chunk_size == 3)
+				else if (stack_b->size == 3)
 				{
 					stack_b_has_three(stack_a, stack_b);
 				}
@@ -484,6 +484,7 @@ void	move_chunks_to_a(t_stack *stack_b, t_queue *stack_a, t_chunks **chunks, int
 					int				pushed_items_count;
 					int				encountered_big_val;
 					int				chunk_mid_val;
+
 					pushed_items_count = 0;
 					head_b = stack_b->s_nodes;
 					head_b_moves = 0;
@@ -495,6 +496,8 @@ void	move_chunks_to_a(t_stack *stack_b, t_queue *stack_a, t_chunks **chunks, int
 					{
 						push_to_a_state = 0;
 						printf("Head b item is: %d\n", head_b->item);
+						// print_stack(stack_b);
+						// display(stack_a);
 						if (chunks[total_chunks - 1]->data == 3 && stack_b->size != 3)
 						{
 							printf("Executing stack has 3\n");
@@ -829,7 +832,9 @@ int main(int argc, char *argv[])
 		// display(stack_a);
 		// print_stack(stack_b);
 		if (stack_b->size > 0)
+		{
 			printf("---------Moving items back to A--------\n");
+		}
 		while (stack_b->size > 0)
 		{
 			move_chunks_to_a(stack_b, stack_a, chunks, total_chunks);
