@@ -6,11 +6,50 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 19:58:27 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/02 20:00:17 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/03 13:22:25 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	*gen_descending_chunk(t_stack *stack_b, int arr_size)
+{
+	t_stack_node	*head;
+	int				*arr;
+	int				i;
+
+	head = stack_b->s_nodes;
+	arr = (int *) malloc(sizeof(int) * arr_size);
+	if (!arr)
+		return 0;
+
+	i = 0;
+	while (head != NULL)
+	{
+		arr[i] = head->item;
+		head = head->next;
+		i++;
+	}
+
+	int step;
+    int j;
+    int key;
+
+    step = 1;
+    while (step < arr_size)
+    {
+        key = arr[step];
+        j = step - 1;
+        while (key > arr[j] && j >= 0)
+        {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        arr[j + 1] = key;
+        step++;
+    }
+	return (arr);
+}
 
 int	insertion_sort_on_b(t_stack	*stack_b, int arr_size)
 {
@@ -20,13 +59,12 @@ int	insertion_sort_on_b(t_stack	*stack_b, int arr_size)
 
 	head = stack_b->s_nodes;
 	arr = (int *) malloc(sizeof(int) * arr_size);
-	// arr = (int *) malloc(sizeof(3));
 	if (!arr)
 		return 0;
 	int	i;
 
 	i = 0;
-	while (head != NULL/* && (i < 3) */)
+	while (head != NULL)
 	{
 		arr[i] = head->item;
 		head = head->next;
@@ -51,16 +89,6 @@ int	insertion_sort_on_b(t_stack	*stack_b, int arr_size)
         step++;
     }
 
-	// i = 0;
-	/* 
-		Printing the sorted array created with insertion sort
-	 */
-	// printf("Sorted Array:\n");
-	// while(i < stack_b->size)
-	// {
-	// 	printf("%d\n", arr[i]);
-	// 	i++;
-	// }
 	median = arr[arr_size/ 2];
 	// free(arr);
 	// arr = NULL;
@@ -89,12 +117,11 @@ int is_chunk_ordered(t_stack *stack_b, int chunk_size)
 
 	head = stack_b->s_nodes;
 	arr = (int *) malloc(sizeof(int) * chunk_size);
-	// arr = (int *) malloc(sizeof(3));
 	if (!arr)
 		return 0;
 
 	i = 0;
-	while (head != NULL/* && (i < 3) */)
+	while (head != NULL)
 	{
 		arr[i] = head->item;
 		head = head->next;
@@ -119,17 +146,6 @@ int is_chunk_ordered(t_stack *stack_b, int chunk_size)
         arr[j + 1] = key;
         step++;
     }
-
-	i = 0;
-	/* 
-		Printing the sorted array created with insertion sort
-	 */
-	printf("Sorted Array:\n");
-	while(i < chunk_size)
-	{
-		printf("%d\n", arr[i]);
-		i++;
-	}
 	// free(arr);
 	// arr = NULL;
 	return (1);
@@ -143,12 +159,11 @@ int	is_ordered(t_queue *stack_a)
 
 	head = stack_a->front;
 	arr = (int *) malloc(sizeof(int) * stack_a->size);
-	// arr = (int *) malloc(sizeof(3));
 	if (!arr)
 		return 0;
 
 	i = 0;
-	while (head != NULL/* && (i < 3) */)
+	while (head != NULL)
 	{
 		arr[i] = head->item;
 		head = head->next;
@@ -173,17 +188,6 @@ int	is_ordered(t_queue *stack_a)
         arr[j + 1] = key;
         step++;
     }
-
-	// i = 0;
-	/* 
-		Printing the sorted array created with insertion sort
-	 */
-	// printf("Sorted Array:\n");
-	// while(i < stack_a->size)
-	// {
-	// 	printf("%d\n", arr[i]);
-	// 	i++;
-	// }
 	// free(arr);
 	// arr = NULL;
 	return (1);
@@ -197,13 +201,12 @@ int	insertion_sort(t_queue	*stack_a)
 
 	head = stack_a->front;
 	arr = (int *) malloc(sizeof(int) * stack_a->size);
-	// arr = (int *) malloc(sizeof(3));
 	if (!arr)
 		return 0;
 	int	i;
 
 	i = 0;
-	while (head != NULL/* && (i < 3) */)
+	while (head != NULL)
 	{
 		arr[i] = head->item;
 		head = head->next;
@@ -227,17 +230,6 @@ int	insertion_sort(t_queue	*stack_a)
         arr[j + 1] = key;
         step++;
     }
-
-	// i = 0;
-	/* 
-		Printing the sorted array created with insertion sort
-	 */
-	// printf("Sorted Array:\n");
-	// while(i < stack_a->size)
-	// {
-	// 	printf("%d\n", arr[i]);
-	// 	i++;
-	// }
 	median = arr[stack_a->size/ 2];
 	// free(arr);
 	// arr = NULL;
@@ -248,15 +240,6 @@ int	insertion_sort(t_queue	*stack_a)
 /*
 	Algorithm to sort Array of numbers goes here
 */
- 
- /// int				first_num_position;
-// int				second_num_position;
-// int				num_position;
-// int				move_couts;
-// t_queue_node	*head;
-
-// -1 2 3 4 10 11 12 13 14 15
-
 void	stack_b_has_two(t_queue *stack_a, t_stack *stack_b)
 {
 	int	k;
@@ -283,6 +266,7 @@ void	stack_b_has_two(t_queue *stack_a, t_stack *stack_b)
 		printf("Size of stack B is: %d\n", stack_b->size);
 	}
 }
+
 void	stack_b_has_three(t_queue *stack_a, t_stack *stack_b)
 {
 	int	median;
@@ -401,9 +385,9 @@ void	stack_b_has_three_chunks(t_queue *stack_a, t_stack *stack_b)
 
 void	move_chunks_to_b(t_queue *stack_a, t_stack *stack_b)
 {
-	int		median;
-	t_queue_node *head_a;
-	int head_a_moves;
+	int				median;
+	t_queue_node	*head_a;
+	int				head_a_moves;
 
 	
 	median = insertion_sort(stack_a);
@@ -426,15 +410,17 @@ void	move_chunks_to_b(t_queue *stack_a, t_stack *stack_b)
 		head_a_moves++;
 	}
 }
-void	stack_b_has_chunks()
+/* void	stack_b_has_chunks()
 {
 	
-}
+} */
 
 void	move_chunks_to_a(t_stack *stack_b, t_queue *stack_a, t_chunks **chunks, int total_chunks)
 {
 	int	median;
+	int *descending_arr;
 
+	descending_arr = NULL;
 	print_stack(stack_b);
 	if (stack_b->size <= 2)
 	{
@@ -479,141 +465,127 @@ void	move_chunks_to_a(t_stack *stack_b, t_queue *stack_a, t_chunks **chunks, int
 					t_stack_node	*head_b;
 					int				rotations;
 					int				head_b_moves;
-					int				temp;
+					// int				temp;
 					int				push_to_a_state;
 					int				pushed_items_count;
 					int				encountered_big_val;
 					int				chunk_mid_val;
+					int				items_at_top_count;
 
-					pushed_items_count = 0;
 					head_b = stack_b->s_nodes;
+					pushed_items_count = 0;
 					head_b_moves = 0;
 					rotations = 0;
 					encountered_big_val = 0;
 					chunk_mid_val = chunks[total_chunks - 1]->data / 2;
 					
+					descending_arr = gen_descending_chunk(stack_b, chunks[total_chunks - 1]->data);
+					int search_index = chunks[total_chunks - 1]->data;
+					items_at_top_count = chunks[total_chunks - 1]->data;
 					while (chunks[total_chunks - 1]->data > 0)
 					{
+						int search_val = descending_arr[search_index - chunks[total_chunks - 1]->data];
+						printf("x: %d\n", search_val);
 						push_to_a_state = 0;
 						printf("Head b item is: %d\n", head_b->item);
-						// print_stack(stack_b);
-						// display(stack_a);
-						if (chunks[total_chunks - 1]->data == 3 && stack_b->size != 3)
+						if (head_b->item == search_val)
 						{
-							printf("Executing stack has 3\n");
-							printf("chunk size: %d\n", chunks[total_chunks - 1]->data);
-							stack_b_has_three_chunks(stack_a, stack_b);
-							break ;
-						}
-						if (stack_b->size == 3)
-						{
-							stack_b_has_three(stack_a, stack_b);
-							break ;
-						}
-						if (head_b->item <= median && pushed_items_count < chunk_mid_val && !encountered_big_val)
-						{
-							rotations++;
-							printf("Rotations: %d\n", rotations);
-						}
-						else if (head_b->item < median && pushed_items_count == chunk_mid_val)
-						{
-							rotations++;
-							printf("Rotations: %d\n", rotations);
-						}
-						if (head_b->item < median && pushed_items_count > chunk_mid_val
-							&& chunks[total_chunks - 1]->data > 1)
-						{
-							temp = head_b->item;
-							while (head_b && head_b_moves < (chunks[total_chunks - 1]->data - 1))
-							{
-								if (temp < head_b->next->item)
-								{
-									temp = head_b->next->item;
-									rotations = head_b_moves + 1;
-								}
-								head_b = head_b->next;
-								head_b_moves++;
-							}
-							// if (head_b->item < head_b->next->item)
-							// {
-							// 	if (head_b_moves > 0)
-							// 	{
-							// 		rotations += head_b_moves;
-							// 	}
-							// }
-						}
-						if (head_b->item > median)
-						{
-							printf("Encountered big val\n");
-							encountered_big_val = 1;
-							temp = head_b->item;
-							while (head_b && head_b_moves < (chunks[total_chunks - 1]->data - 1))
-							{
-								if (temp < head_b->next->item)
-								{
-									temp = head_b->next->item;
-									rotations = head_b_moves + 1;
-									// rotations += head_b_moves;
-									// rotations++;
-									// printf("head moves: %d\n", head_b_moves);
-									// printf("Rotations: %d\n", rotations);
-								}
-								head_b = head_b->next;
-								head_b_moves++;
-							}
-							printf("Rotations: %d\n", rotations);
-						}
-						if (head_b->item == median && pushed_items_count == chunk_mid_val)
-						{
-							printf("Encountered Median\n");
-							int	temp_rotations = rotations;
-							while (temp_rotations > 0)
-							{
-								rotate_b(stack_b);
-								temp_rotations--;
-							}
 							push_a(stack_b, stack_a);
+							push_to_a_state = 1;
 							chunks[total_chunks - 1]->data--;
-							pushed_items_count++;
-							while (rotations > 0)
+							items_at_top_count = chunks[total_chunks - 1]->data - rotations;
+							printf("Number of items at top: %d\n", items_at_top_count);
+							printf("Rotations: %d\n", rotations);
+							printf("Chunk size: %d\n", chunks[total_chunks - 1]->data);
+						}
+						else if (head_b->item != search_val)
+						{
+							if (items_at_top_count > 1)
+							{
+								int temp_items_at_top = items_at_top_count;
+								int	search_at_top = 0;
+								t_stack_node *temp_head_b = head_b;
+								while (temp_items_at_top > 0)
+								{
+									if (temp_head_b->item == search_val)
+									{
+										search_at_top = 1;
+									}
+									temp_head_b = temp_head_b->next;
+									temp_items_at_top--;
+								}
+								if (search_at_top)
+								{
+									rotate_b(stack_b);
+									rotations++;
+									search_at_top = 0;
+								}
+								else
+								{
+									int y = 0;
+									if (rotations)
+									{
+										rrotate_b(stack_b);
+										while (search_val != stack_b->s_nodes->item)
+										{
+											rrotate_b(stack_b);
+											y++;
+										}
+										rotations -= (y + 1);
+									}
+									head_b = stack_b->s_nodes;
+								}
+							}
+							else if (items_at_top_count == 1 && rotations > 0)
 							{
 								rrotate_b(stack_b);
+								items_at_top_count++;
 								rotations--;
 							}
-							head_b = stack_b->s_nodes;
-							push_to_a_state = 1;
-							head_b_moves = 0;
-						}
-						if (head_b_moves == (chunks[total_chunks - 1]->data - 1))
-						{
-							int	temp_rotations = rotations;
-							encountered_big_val = 0;
-							while (temp_rotations > 0)
-							{
-								rotate_b(stack_b);
-								temp_rotations--;
-							}
-							push_a(stack_b, stack_a);
-							chunks[total_chunks - 1]->data--;
-							pushed_items_count++;
-							while (rotations > 0)
-							{
-								rrotate_b(stack_b);
-								rotations--;
-							}
-							head_b = stack_b->s_nodes;
-							push_to_a_state = 1;
-							head_b_moves = 0;
 						}
 						if (!push_to_a_state)
 						{
 							head_b = head_b->next;
 							head_b_moves++;
 						}
+						if (items_at_top_count > 0)
+						{
+							head_b = stack_b->s_nodes;
+						}
+						else if (items_at_top_count == 0 && chunks[total_chunks - 1]->data > 0)
+						{
+							int	y;
+
+							y = 0;
+							printf("True\n");
+							search_val = descending_arr[search_index - chunks[total_chunks - 1]->data];
+							if (stack_b->size == 1)
+							{
+								push_a(stack_b, stack_a);
+								rotations = 0;
+								break ;
+							}
+							else
+							{
+								rrotate_b(stack_b);
+								while (search_val != stack_b->s_nodes->item)
+								{
+									rrotate_b(stack_b);
+									y++;
+								}
+								rotations -= (y + 1);
+							}
+							head_b = stack_b->s_nodes;
+						}
 					}
 				}
 			}
 			total_chunks--;
+			if (descending_arr)
+			{
+				free(descending_arr);
+				descending_arr = NULL;
+			}
 		}
 		
 		
