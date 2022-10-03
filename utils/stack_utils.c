@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 18:36:27 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/02 15:18:45 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/03 13:50:29 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,15 @@ void	print_stack(t_stack *s)
 		printf("%d\n", head->item);
 		head = head->next;
 	}
+	printf("\n");
 }
 
 void	peek(t_stack *s)
 {
 	if (is_empty(s))
 	{
-		// printf("Stack is empty\n");
+		// // printf("Stack is empty\n");
 		return ;
 	}
-	// printf("Element on top of stack: %d\n", s->s_nodes->item);
+	// // printf("Element on top of stack: %d\n", s->s_nodes->item);
 }

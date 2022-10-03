@@ -113,6 +113,29 @@ void	reverse_a_b(t_queue *stack_a, t_stack *stack_b);
 int	check_passed_vals(char *str);
 int	check_duplicates(t_queue *stack_a);
 
+/*
+====================================================================
+			push swap sorting
+====================================================================
+*/
+int	insertion_sort(t_queue	*stack_a);
+int	insertion_sort_on_b(t_stack	*stack_b, int arr_size);
+int	is_ordered(t_queue *stack_a);
+int is_chunk_ordered(t_stack *stack_b, int chunk_size);
+int	*gen_descending_chunk(t_stack *stack_b, int arr_size);
+
+/*
+====================================================================
+			push swap sorting
+====================================================================
+*/
+void	stack_b_has_two(t_queue *stack_a, t_stack *stack_b);
+void	stack_b_has_three(t_queue *stack_a, t_stack *stack_b);
+void	stack_b_has_three_chunks(t_queue *stack_a, t_stack *stack_b);
+
+
+void	move_chunks_to_b(t_queue *stack_a, t_stack *stack_b);
+void	move_chunks_to_a(t_stack *stack_b, t_queue *stack_a, t_chunks **chunks, int total_chunks);
 
 
 # endif

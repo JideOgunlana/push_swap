@@ -10,7 +10,8 @@ LIBFT_OBJ = ../libft/libft.a
 
 UTILS_SRC =	utils/create_queue utils/create_stack utils/error_checkers \
 			utils/stack_a_b_ops utils/stack_a_operations \
-			utils/stack_a_b_ops utils/stack_utils utils/stack_b_operations
+			utils/stack_a_b_ops utils/stack_utils utils/stack_b_operations \
+			utils/sort_moves utils/sort_random_num utils/sort_push_algo
 
 MAIN_SRC	= push_swap
 
