@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 19:58:27 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/04 14:17:00 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/04 18:12:57 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,7 @@ int main(int argc, char *argv[])
 			// set->data = stack_a->size / 2;
 			// set->key = set_count;
 			chunks[set_count] = get_chunk_set(stack_a, set_count);
-			move_chunks_to_b(stack_a, stack_b);
+			move_chunks_to_b(stack_a, stack_b, chunks[set_count]->data);
 			set_count++;
 		}
 		print_stack(stack_b);

@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 14:04:46 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/04 13:20:12 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/04 17:56:14 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,47 @@
 	for a given chunk should be pushed to Stack B
 
  */
+
+int	*gen_ascending_chunk(t_queue *stack_a)
+{
+	t_queue_node	*head;
+	int				*arr;
+
+	head = stack_a->front;
+	arr = (int *) malloc(sizeof(int) * stack_a->size);
+	if (!arr)
+		return 0;
+	int	i;
+
+	i = 0;
+	while (head != NULL)
+	{
+		arr[i] = head->item;
+		head = head->next;
+		i++;
+	}
+
+	int step;
+    int j;
+    int key;
+
+    step = 1;
+    while (step < stack_a->size)
+    {
+        key = arr[step];
+        j = step - 1;
+        while (key < arr[j] && j >= 0)
+        {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        arr[j + 1] = key;
+        step++;
+    }
+
+	return (arr);
+}
+
 int	insertion_sort(t_queue	*stack_a)
 {
 	t_queue_node	*head;
