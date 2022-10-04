@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 19:58:27 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/03 18:24:00 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/04 14:17:00 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,14 @@ t_chunks	*get_chunk_set(t_queue *stack_a, int set_count)
 	t_chunks	*set;
 
 	set = (t_chunks *)malloc(sizeof(t_chunks));
-	set->data = stack_a->size / 2;
+	if (stack_a->size > 10)
+	{
+		set->data = 5;
+	}
+	else
+	{
+		set->data = stack_a->size / 2;
+	}
 	set->key = set_count;
 
 	return set;
@@ -98,35 +105,45 @@ int main(int argc, char *argv[])
 		ft_putstr_fd("\x1B[0m\n", STDERR_FILENO);
 		if (split)
 			ft_free(split);
-		system("leaks a.out");
+		// system("leaks push_swap");
 		return 0;
 	}
 
 /* 
 	Show the stack before the sorting algorithm is applied
  */
-	display(stack_a);
+	// display(stack_a);
 
 	t_chunks	**chunks;
 	t_chunks	*set;
 	int			total_chunks;
-	int			stack_size;
+	int			temp_stack_a_size;
 
-	total_chunks = 0;
-	stack_size = stack_a->size;
-	while (stack_size > 3)
+	temp_stack_a_size = stack_a->size;
+	// if (temp_stack_a_size > 10)
+	// 	total_chunks = 1;
+	// else
+		total_chunks = 0;
+	while (temp_stack_a_size > 3)
 	{
-		stack_size = stack_size - (stack_size >> 1);
+		if (stack_a->size > 10)
+		{
+			temp_stack_a_size -= 5;
+		}
+		else
+		{
+			temp_stack_a_size = temp_stack_a_size - (temp_stack_a_size / 2);
+		}
 		total_chunks++;
 	}
-	// printf("Total chunks to create: %d\n", total_chunks);
+	// // printf("Total chunks to create: %d\n", total_chunks);
 	set = (t_chunks *)malloc(sizeof(t_chunks));
 	chunks = (t_chunks **)malloc(sizeof(set) * total_chunks);
 	if (!chunks || !set)
 		return 0;
 	if (is_ordered(stack_a))
 	{
-		// printf("Stack A is already ordered\n");
+		// // printf("Stack A is already ordered\n");
 		return 0;
 	}
 	else
@@ -140,14 +157,16 @@ int main(int argc, char *argv[])
 			move_chunks_to_b(stack_a, stack_b);
 			set_count++;
 		}
-
+		print_stack(stack_b);
+		printf("total chunks: %d\n", total_chunks);
 		i = 0;
 		while (i < total_chunks)
 		{
-			// printf("Chunk index %d  ", chunks[i]->key);
-			// printf("size of chunk: %d\n",chunks[i]->data);
+			printf("Chunk index %d  ", chunks[i]->key);
+			printf("size of chunk: %d\n",chunks[i]->data);
 			i++;
 		}
+		// exit(0);
 		if (!is_ordered(stack_a))
 		{
 			median = insertion_sort(stack_a);
@@ -196,10 +215,10 @@ int main(int argc, char *argv[])
 	Show the Stacks After applying the sorting algorithm
  */
 
-	ft_putstr_fd("\n\x1b[1;33m", STDERR_FILENO);
+	// ft_putstr_fd("\n\x1b[1;33m", STDERR_FILENO);
 	printf("\nAfter applying sorting algorithm, We've got:\x1B[0m\n");
 	display(stack_a);
 	print_stack(stack_b);
-	system("leaks push_swap");
+	// system("leaks push_swap");
 	return 0;
 }

@@ -6,36 +6,51 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 14:17:32 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/03 20:21:32 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/04 14:13:41 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
+// Improve this function to check if rotating or reversing is a better option
 void	move_chunks_to_b(t_queue *stack_a, t_stack *stack_b)
 {
 	int				median;
 	t_queue_node	*head_a;
 	int				head_a_moves;
 
-	
 	median = insertion_sort(stack_a);
 	head_a = stack_a->front;
 	head_a_moves = 0;
+
 
 	while (head_a)
 	{
 		if (head_a->item < median)
 		{
-			while (head_a_moves > 0)
+			if (head_a_moves < (stack_a->size / 2))
 			{
-				rotate_a(stack_a);
-				head_a_moves--;
+				while (head_a_moves > 0)
+				{
+					rotate_a(stack_a);
+					head_a_moves--;
+				}
+			}
+			else
+			{
+				head_a_moves = stack_a->size - head_a_moves;
+				while (head_a_moves > 0)
+				{
+					rrotate_a(stack_a);
+					head_a_moves--;
+				}
 			}
 			push_b(stack_a, stack_b);
+			head_a = stack_a->front;
 			head_a_moves = -1;
 		}
-		head_a = head_a->next;
+		if (head_a_moves != -1)
+			head_a = head_a->next;
 		head_a_moves++;
 	}
 }
@@ -45,7 +60,7 @@ void	move_chunks_to_a(t_stack *stack_b, t_queue *stack_a, t_chunks **chunks, int
 	int	median;
 	int *descending_arr;
 	descending_arr = NULL;
-	print_stack(stack_b);
+	// print_stack(stack_b);
 	if (stack_b->size <= 2)
 	{
 		// printf("\nSorting stack B having only 2 or less items\n");
@@ -64,7 +79,7 @@ void	move_chunks_to_a(t_stack *stack_b, t_queue *stack_a, t_chunks **chunks, int
 		{
 			median = insertion_sort_on_b(stack_b, chunks[total_chunks - 1]->data);
 			int chunk_size = chunks[total_chunks - 1]->data;
-			printf("chunk size: %d\n", chunk_size);
+			// printf("chunk size: %d\n", chunk_size);
 			if (is_chunk_ordered(stack_b, chunk_size))
 			{
 				while (chunk_size > 0)
@@ -102,6 +117,7 @@ void	move_chunks_to_a(t_stack *stack_b, t_queue *stack_a, t_chunks **chunks, int
 					rotations = 0;
 					encountered_big_val = 0;
 					chunk_mid_val = chunks[total_chunks - 1]->data / 2;
+					
 					descending_arr = gen_descending_chunk(stack_b, chunks[total_chunks - 1]->data);
 					int search_index = chunks[total_chunks - 1]->data;
 					items_at_top_count = chunks[total_chunks - 1]->data;

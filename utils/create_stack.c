@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 18:33:48 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/03 13:29:04 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/03 20:29:38 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ t_stack_node	*pop(t_stack *s)
 
 	if (is_empty(s))
 	{
-		// printf("Stack B is empty\n");
+		// // printf("Stack B is empty\n");
 		return 0;
 	}
 	top_node = s->s_nodes->next;

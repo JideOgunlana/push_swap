@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 18:36:27 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/03 13:50:29 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/04 12:33:03 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	print_stack(t_stack *s)
 	printf("\nElements in stack B:\n");
 	if (is_empty(s))
 	{
-		printf("Stack B is empty\n");
+		// printf("Stack B is empty\n");
 		return ;
 	}
 	while (head != NULL)
@@ -35,8 +35,8 @@ void	peek(t_stack *s)
 {
 	if (is_empty(s))
 	{
-		// // printf("Stack is empty\n");
+		// printf("Stack is empty\n");
 		return ;
 	}
-	// // printf("Element on top of stack: %d\n", s->s_nodes->item);
+	// printf("Element on top of stack: %d\n", s->s_nodes->item);
 }
