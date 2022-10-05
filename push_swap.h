@@ -4,7 +4,7 @@
 # define LIMIT_100 30
 # include <stdio.h>
 # include <stdlib.h>
-# include "../libft/libft.h"
+# include "./includes/libft/libft.h"
 # include "../gnl/get_next_line.h"
 
 
