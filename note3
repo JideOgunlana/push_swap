@@ -134,3 +134,7 @@ rr pa -> stack B (2)
 
 total r => 16
 total rr => 20
+
+
+500 - limmit 45 | stack size 40 | total stack starts from 0
+100 - limit 15 stack size 40 | total stack starts from 1

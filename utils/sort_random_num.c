@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 14:04:46 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/04 17:56:14 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/05 03:32:50 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,14 +98,14 @@ int	insertion_sort(t_queue	*stack_a)
         arr[j + 1] = key;
         step++;
     }
-	if (stack_a->size > 10)
-	{
-		int limiter = stack_a->size - 5;
-		median = arr[stack_a->size - limiter];
-		// printf("stack A size: %d\tmedian: %d",stack_a->size,  median);
-		// exit(0);
-	}
-	else
+	// if (stack_a->size > 40)
+	// {
+	// 	int limiter = stack_a->size - LIMIT;
+	// 	median = arr[stack_a->size - limiter];
+	// 	// // printf("stack A size: %d\tmedian: %d",stack_a->size,  median);
+	// 	// exit(0);
+	// }
+	// else
 		median = arr[stack_a->size / 2];
 	free(arr);
 	arr = NULL;
@@ -182,7 +182,7 @@ int is_chunk_ordered(t_stack *stack_b, int chunk_size)
     int key;
 
     step = 1;
-	// // printf("chunk size: %d\n", chunk_size);
+	// // // printf("chunk size: %d\n", chunk_size);
     while (step < chunk_size) // descending order check
     {
         key = arr[step];

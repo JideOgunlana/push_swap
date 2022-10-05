@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 14:06:13 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/03 20:29:38 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/05 00:48:21 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ void	stack_b_has_two(t_queue *stack_a, t_stack *stack_b)
 	k = 0;
 	if (is_chunk_ordered(stack_b, 2))
 	{
-		// // printf("Chunk is ordered\n");
+		// // // printf("Chunk is ordered\n");
 		while (k < 2)
 		{
-			// // printf("Total elements in 1 chunk %d\n", 2);
+			// // // printf("Total elements in 1 chunk %d\n", 2);
 			push_a(stack_b, stack_a);
 			k++;
 		}
@@ -39,7 +39,7 @@ void	stack_b_has_two(t_queue *stack_a, t_stack *stack_b)
 			push_a(stack_b, stack_a);
 			k++;
 		}
-		// // printf("Size of stack B is: %d\n", stack_b->size);
+		// // // printf("Size of stack B is: %d\n", stack_b->size);
 	}
 }
 

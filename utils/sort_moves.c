@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 14:17:32 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/05 00:38:17 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/05 03:35:30 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	check_op_to_b(t_queue *stack_a, t_stack *stack_b, int *temp_chunk, int chun
 		i = 0;
 		while (i < chunk_size)
 		{
-			printf("temp %d A: %d\n", temp_chunk[i], head_a->item);
+			// printf("temp %d A: %d\n", temp_chunk[i], head_a->item);
 			if (head_a->item == temp_chunk[i])
 			{
 				found_last++;
@@ -50,11 +50,11 @@ void	check_op_to_b(t_queue *stack_a, t_stack *stack_b, int *temp_chunk, int chun
 				}
 				if (found_last == hold_chunk_size)
 				{
-					printf("Stack size: %d\n", stack_a->size);
-					printf("head a move: %d\n", head_a_moves);
+					// printf("Stack size: %d\n", stack_a->size);
+					// printf("head a move: %d\n", head_a_moves);
 					temp->rr = stack_a->size - head_a_moves;
-					printf("\n***found last***: %d\n", found_last);
-					printf("hold chunk size: %d\n", hold_chunk_size);
+					// printf("\n***found last***: %d\n", found_last);
+					// printf("hold chunk size: %d\n", hold_chunk_size);
 
 				}
 				r += head_a_moves;
@@ -62,16 +62,16 @@ void	check_op_to_b(t_queue *stack_a, t_stack *stack_b, int *temp_chunk, int chun
 			}
 			if (found_first && found_last == hold_chunk_size)
 			{
-				printf("total r moves: %d\n", r);
-				printf("total rr moves: %d\n", rr);
-				printf("r moves: %d\n", temp->r);
-				printf("rr moves: %d\n", temp->rr);
-				display(stack_a);
+				// printf("total r moves: %d\n", r);
+				// printf("total rr moves: %d\n", rr);
+				// printf("r moves: %d\n", temp->r);
+				// printf("rr moves: %d\n", temp->rr);
+				// display(stack_a);
 				if (hold_chunk_size == 1)
 				{
 					if (r < rr)
 					{
-						printf("*Use rotation*");
+						// printf("*Use rotation*");
 						while (temp->r > 0)
 						{
 							rotate_a(stack_a);
@@ -81,7 +81,7 @@ void	check_op_to_b(t_queue *stack_a, t_stack *stack_b, int *temp_chunk, int chun
 					}
 					else if (r > rr)
 					{
-						printf("*Use reverse rotation*");
+						// printf("*Use reverse rotation*");
 						while (rr > 0)
 						{
 							rrotate_a(stack_a);
@@ -104,7 +104,7 @@ void	check_op_to_b(t_queue *stack_a, t_stack *stack_b, int *temp_chunk, int chun
 				{
 					if (r < rr)
 					{
-						printf("Use rotation");
+						// printf("Use rotation");
 						while (temp->r > 0)
 						{
 							rotate_a(stack_a);
@@ -115,7 +115,7 @@ void	check_op_to_b(t_queue *stack_a, t_stack *stack_b, int *temp_chunk, int chun
 					}
 					else if (r > rr)
 					{
-						printf("Use reverse rotation");
+						// printf("Use reverse rotation");
 						while (temp->rr > 0)
 						{
 							rrotate_a(stack_a);
@@ -126,10 +126,10 @@ void	check_op_to_b(t_queue *stack_a, t_stack *stack_b, int *temp_chunk, int chun
 					}
 					else
 					{
-						printf("Check the top and bottom values for least move\n");
+						// printf("Check the top and bottom values for least move\n");
 						if (temp->r < temp->rr && temp->rr != 0)
 						{
-							printf("Use rotation\n");
+							// printf("Use rotation\n");
 							while (temp->r > 0)
 							{
 								rotate_a(stack_a);
@@ -139,7 +139,7 @@ void	check_op_to_b(t_queue *stack_a, t_stack *stack_b, int *temp_chunk, int chun
 						}
 						else if (temp->r > temp->rr && temp->rr != 0)
 						{
-							printf("Use reverse rotation\n");
+							// printf("Use reverse rotation\n");
 							while (temp->rr > 0)
 							{
 								rrotate_a(stack_a);
@@ -149,7 +149,7 @@ void	check_op_to_b(t_queue *stack_a, t_stack *stack_b, int *temp_chunk, int chun
 						}
 						else
 						{
-							printf("r and rr are same\n");
+							// printf("r and rr are same\n");
 							while (temp->r > 0)
 							{
 								rotate_a(stack_a);
@@ -164,8 +164,8 @@ void	check_op_to_b(t_queue *stack_a, t_stack *stack_b, int *temp_chunk, int chun
 				found_last = 0;
 				r = 0;
 				rr =  0;
-				print_stack(stack_b);
-				printf("chunk size: %d\n", hold_chunk_size);
+				// print_stack(stack_b);
+				// printf("chunk size: %d\n", hold_chunk_size);
 				head_a_moves = -1;
 				temp->r = 0;
 				temp->rr = 0;
@@ -184,11 +184,11 @@ void	check_op_to_b(t_queue *stack_a, t_stack *stack_b, int *temp_chunk, int chun
 // Improve this function to check if rotating or reversing is a better option
 void	move_chunks_to_b(t_queue *stack_a, t_stack *stack_b, int chunk_size)
 {
-	int				median;
+	// int				median;
 	t_queue_node	*head_a;
 	int				head_a_moves;
 
-	median = insertion_sort(stack_a);
+	// median = insertion_sort(stack_a);
 	head_a = stack_a->front;
 	head_a_moves = 0;
 
@@ -201,8 +201,8 @@ void	move_chunks_to_b(t_queue *stack_a, t_stack *stack_b, int chunk_size)
 	while (i < chunk_size)
 	{
 		temp_chunk[i] = temp_arr[i];
-		printf("temp: %d\n", temp_chunk[i]);
-		printf("chunk size: %d\n", chunk_size);
+		// printf("temp: %d\n", temp_chunk[i]);
+		// printf("chunk size: %d\n", chunk_size);
 		i++;
 	}
 	check_op_to_b(stack_a, stack_b, temp_chunk, chunk_size);
@@ -248,23 +248,23 @@ void	move_chunks_to_a(t_stack *stack_b, t_queue *stack_a, t_chunks **chunks, int
 	// print_stack(stack_b);
 	if (stack_b->size <= 2)
 	{
-		// printf("\nSorting stack B having only 2 or less items\n");
+		// // printf("\nSorting stack B having only 2 or less items\n");
 		stack_b_has_two(stack_a, stack_b);
 	}
 	if (stack_b->size == 3)
 	{
-		// printf("\nSort ing stack B having only 3 items\n");
+		// // printf("\nSort ing stack B having only 3 items\n");
 		stack_b_has_three(stack_a, stack_b);
 	}
 	if (stack_b->size > 3)
 	{
-		// printf("\nSorting stack B having chunks\n");
-		// printf("Total chunks: %d\n", total_chunks);
+		// // printf("\nSorting stack B having chunks\n");
+		// // printf("Total chunks: %d\n", total_chunks);
 		while (total_chunks > 0)
 		{
 			median = insertion_sort_on_b(stack_b, chunks[total_chunks - 1]->data);
 			int chunk_size = chunks[total_chunks - 1]->data;
-			// printf("chunk size: %d\n", chunk_size);
+			// // printf("chunk size: %d\n", chunk_size);
 			if (is_chunk_ordered(stack_b, chunk_size))
 			{
 				while (chunk_size > 0)
@@ -275,7 +275,7 @@ void	move_chunks_to_a(t_stack *stack_b, t_queue *stack_a, t_chunks **chunks, int
 			}
 			else
 			{
-				// printf("Chunk size is: %d\n\n", chunk_size);
+				// // printf("Chunk size is: %d\n\n", chunk_size);
 				if (stack_b->size <= 2)
 				{
 					stack_b_has_two(stack_a, stack_b);
@@ -286,7 +286,7 @@ void	move_chunks_to_a(t_stack *stack_b, t_queue *stack_a, t_chunks **chunks, int
 				}
 				else
 				{
-					// printf("Chunk size is large\n");
+					// // printf("Chunk size is large\n");
 					t_stack_node	*head_b;
 					int				rotations;
 					int				head_b_moves;
@@ -309,18 +309,18 @@ void	move_chunks_to_a(t_stack *stack_b, t_queue *stack_a, t_chunks **chunks, int
 					while (chunks[total_chunks - 1]->data > 0)
 					{
 						int search_val = descending_arr[search_index - chunks[total_chunks - 1]->data];
-						// printf("x: %d\n", search_val);
+						// // printf("x: %d\n", search_val);
 						push_to_a_state = 0;
-						// printf("Head b item is: %d\n", head_b->item);
+						// // printf("Head b item is: %d\n", head_b->item);
 						if (head_b->item == search_val)
 						{
 							push_a(stack_b, stack_a);
 							push_to_a_state = 1;
 							chunks[total_chunks - 1]->data--;
 							items_at_top_count = chunks[total_chunks - 1]->data - rotations;
-							// printf("Number of items at top: %d\n", items_at_top_count);
-							// printf("Rotations: %d\n", rotations);
-							// printf("Chunk size: %d\n", chunks[total_chunks - 1]->data);
+							// // printf("Number of items at top: %d\n", items_at_top_count);
+							// // printf("Rotations: %d\n", rotations);
+							// // printf("Chunk size: %d\n", chunks[total_chunks - 1]->data);
 						}
 						else if (head_b->item != search_val)
 						{

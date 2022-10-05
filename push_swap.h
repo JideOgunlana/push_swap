@@ -1,5 +1,7 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
+# define LIMIT 45
+# define LIMIT_100 30
 # include <stdio.h>
 # include <stdlib.h>
 # include "../libft/libft.h"
