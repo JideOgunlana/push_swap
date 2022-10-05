@@ -6,30 +6,11 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 19:58:27 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/05 04:40:32 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/06 00:36:03 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-
-t_chunks	*get_chunk_set(t_queue *stack_a, int set_count)
-{
-	t_chunks	*set;
-
-	set = (t_chunks *)malloc(sizeof(t_chunks));
-	if (stack_a->size > 40)
-	{
-		set->data = LIMIT;
-	}
-	else
-	{
-		set->data = stack_a->size / 2;
-	}
-	set->key = set_count;
-
-	return set;
-}
 
 int main(int argc, char *argv[])
 {
@@ -39,6 +20,7 @@ int main(int argc, char *argv[])
 	int		i;
 	int		j;
 	int		median;
+	long long	val_ret;
 
 	split = NULL;
 	if (argc < 2)
@@ -54,7 +36,7 @@ int main(int argc, char *argv[])
 		i = 1;
 		while (i < argc)
 		{
-			if (ft_strlen(argv[i]) > 1)
+			if (ft_strlen(argv[i]) > 0)
 				split = ft_split(argv[i], ' ');
 			if (split)
 			{
@@ -68,7 +50,7 @@ int main(int argc, char *argv[])
 						ft_putstr_fd("Contains value that is not a number", STDERR_FILENO);
 						ft_putstr_fd("\x1B[0m\n", STDERR_FILENO);
 						ft_free(split);
-						system("leaks a.out");
+						// system("leaks push_swap");
 						return 0;
 					}
 					j++;
@@ -81,6 +63,7 @@ int main(int argc, char *argv[])
 				ft_putstr_fd("Contains value that is not a number", STDERR_FILENO);
 				ft_putstr_fd("\x1B[0m\n", STDERR_FILENO);
 				free(stack_a);
+				// system("leaks push_swap");
 				return 0;
 			}
 			if (split)
@@ -88,13 +71,27 @@ int main(int argc, char *argv[])
 				j = 0;
 				while (split[j] != NULL)
 				{
-					enqueue(stack_a, ft_atoi(split[j]));
+					val_ret = ft_atoi(split[j]);
+					if (val_ret < INT32_MIN || val_ret > INT32_MAX)
+					{
+						printf("Error\n");
+						exit(0);
+					}
+					enqueue(stack_a, val_ret);
 					j++;
 				}
 				split = ft_free(split);
 			}
 			else
-				enqueue(stack_a, ft_atoi(argv[i]));
+			{
+				val_ret = ft_atoi(split[j]);
+				if (val_ret < INT32_MIN || val_ret > INT32_MAX)
+				{
+					printf("Error\n");
+					exit(0);
+				}
+				enqueue(stack_a, val_ret);
+			}
 			i++;
 		}
 	}
@@ -108,11 +105,6 @@ int main(int argc, char *argv[])
 		// system("leaks push_swap");
 		return 0;
 	}
-
-/* 
-	Show the stack before the sorting algorithm is applied
- */
-	// display(stack_a);
 
 	t_chunks	**chunks;
 	t_chunks	*set;
@@ -143,7 +135,7 @@ int main(int argc, char *argv[])
 		return 0;
 	if (is_ordered(stack_a))
 	{
-		// // // printf("Stack A is already ordered\n");
+		system("leaks push_swap");
 		return 0;
 	}
 	else
@@ -151,22 +143,11 @@ int main(int argc, char *argv[])
 		int set_count = 0;
 		while (stack_a->size > 3)
 		{
-			// set->data = stack_a->size / 2;
-			// set->key = set_count;
 			chunks[set_count] = get_chunk_set(stack_a, set_count);
 			move_chunks_to_b(stack_a, stack_b, chunks[set_count]->data);
 			set_count++;
 		}
-		// print_stack(stack_b);
-		// printf("total chunks: %d\n", total_chunks);
-/* 		i = 0;
-		while (i < total_chunks)
-		{
-			printf("Chunk index %d  ", chunks[i]->key);
-			printf("size of chunk: %d\n",chunks[i]->data);
-			i++;
-		} */
-		// exit(0);
+
 		if (!is_ordered(stack_a))
 		{
 			median = insertion_sort(stack_a);
@@ -205,8 +186,6 @@ int main(int argc, char *argv[])
 				}
 			}
 		}
-		// print_stack(stack_b);
-		// printf("+++++++++++++++++++++ Moving back to A++++++++++++++++++++\n");
 		while (stack_b->size > 0)
 		{
 			move_chunks_to_a(stack_b, stack_a, chunks, total_chunks);
@@ -219,8 +198,7 @@ int main(int argc, char *argv[])
 
 	// ft_putstr_fd("\n\x1b[1;33m", STDERR_FILENO);
 	// printf("\nAfter applying sorting algorithm, We've got:\x1B[0m\n");
-	// display(stack_a);
-	// print_stack(stack_b);
-	// system("leaks push_swap");
+	display(stack_a);
+	system("leaks push_swap");
 	return 0;
 }

@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 18:33:50 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/05 01:01:14 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/05 16:23:07 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ t_queue_node    *new_node(t_queue *stack_a, int new_item)
 void    enqueue(t_queue *stack_a, int val)
 {
     t_queue_node  *added_node;
-
     added_node = new_node(stack_a, val);
     if (stack_a->size == 0)
     {

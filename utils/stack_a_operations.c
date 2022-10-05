@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 18:41:30 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/09/17 17:24:53 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/05 22:48:54 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,15 @@ void	rrotate_a(t_queue *stack_a)
 {
 	t_list	*head;
 	t_list	*lst;
-	t_list	**lst_dp;
+	// t_list	**lst_dp;
 	t_list	*new_back;
 	t_queue_node	*prev_back;
 
+	// lst_dp = NULL;
 	if (stack_a->size < 2)
 		return ;
 	lst = (t_list *) stack_a->front;
-	lst_dp = (t_list **) &stack_a->front;
+	// lst_dp = (t_list **) &stack_a->front;
 	head = lst;
 	while (head->next != NULL)
 	{
