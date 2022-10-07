@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 18:39:44 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/06 23:08:13 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/07 16:54:27 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ void	move_chunk_val_to_a(t_queue *stack_a, t_stack *stack_b, t_sort_chunk *sort_
 
 void	found_at_bottom(t_stack *stack_b, t_sort_chunk *sort_chunk)
 {
-	int y = 0;
+	int	y;
+
+	y = 0;
 	if (sort_chunk->rotations)
 	{
 		rrotate_b(stack_b);
@@ -146,7 +148,7 @@ void	sort_chunks_in_b(t_stack *stack_b, t_queue *stack_a, t_sort_chunk *sort_chu
 {
 	while (sort_chunk->total_chunks > 0)
 	{
-		sort_chunk->median = insertion_sort_on_b(stack_b, chunks[sort_chunk->total_chunks - 1]->data);
+		sort_chunk->median = get_b_limiter(stack_b, chunks[sort_chunk->total_chunks - 1]->data);
 		sort_chunk->chunk_size = chunks[sort_chunk->total_chunks - 1]->data;
 		if (is_chunk_ordered(stack_b, sort_chunk->chunk_size))
 			move_sorted_chunk(stack_a, stack_b, sort_chunk);

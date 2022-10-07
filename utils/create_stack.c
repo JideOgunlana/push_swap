@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 18:33:48 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/06 20:01:28 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/07 16:52:30 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,26 +19,28 @@ void	init_stack_b(t_stack *s)
 
 t_stack_node	*new_stack_node(int val)
 {
-	t_stack_node *top_node = (t_stack_node *)malloc(sizeof(t_stack_node));
+	t_stack_node	*top_node;
+
+	top_node = (t_stack_node *)malloc(sizeof(t_stack_node));
 	if (!top_node)
-		return NULL;
+		return (NULL);
 	top_node->item = val;
 	top_node->next = NULL;
-	return top_node;
+	return (top_node);
 }
 
 // CHECK IF THE STACK IS EMPTY
 int	is_empty(t_stack *s)
 {
 	if (s->size == 0)
-		return 1;
-	return 0;
+		return (1);
+	return (0);
 }
 
 // ADD ELEMENTS INTO STACK
 void	push(t_stack *s, int new_item)
 {
-	t_stack_node *pushed_node;
+	t_stack_node	*pushed_node;
 
 	pushed_node = (t_stack_node *) malloc(sizeof(t_stack_node));
 	if (!pushed_node)
@@ -64,10 +66,7 @@ t_stack_node	*pop(t_stack *s)
 	t_stack_node	*top_node;
 
 	if (is_empty(s))
-	{
-		// // // printf("Stack B is empty\n");
-		return 0;
-	}
+		return (0);
 	top_node = s->s_nodes->next;
 	popped_node = s->s_nodes;
 	s->s_nodes = top_node;

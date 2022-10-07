@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 18:43:14 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/07 01:27:25 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/07 18:19:37 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ t_chunks	*get_chunk_set_xl(t_queue *stack_a, int set_count)
 		set->data = stack_a->size / 2;
 	}
 	set->key = set_count;
-
-	return set;
+	return (set);
 }
 
 t_chunks	*get_chunk_set_l(t_queue *stack_a, int set_count)
@@ -44,8 +43,7 @@ t_chunks	*get_chunk_set_l(t_queue *stack_a, int set_count)
 		set->data = stack_a->size / 2;
 	}
 	set->key = set_count;
-
-	return set;
+	return (set);
 }
 
 t_chunks	*get_chunk_set(t_queue *stack_a, int set_count)
@@ -55,5 +53,5 @@ t_chunks	*get_chunk_set(t_queue *stack_a, int set_count)
 	set = (t_chunks *)malloc(sizeof(t_chunks));
 	set->data = stack_a->size / 2;
 	set->key = set_count;
-	return set;
+	return (set);
 }

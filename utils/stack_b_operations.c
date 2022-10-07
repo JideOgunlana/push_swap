@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 18:37:59 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/09/17 19:19:31 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/07 17:42:41 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	rotate_b(t_stack *stack_b)
 {
-	// t_list	*head;
 	t_list	**lst;
 	t_list	*first;
 
@@ -52,8 +51,8 @@ void	rrotate_b(t_stack *stack_b)
 
 void	swap_b(t_stack *stack_b)
 {
-	t_stack_node *first;
-	t_stack_node *second;
+	t_stack_node	*first;
+	t_stack_node	*second;
 
 	if (stack_b->size < 2)
 		return ;

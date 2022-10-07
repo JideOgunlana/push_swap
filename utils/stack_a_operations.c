@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 18:41:30 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/05 22:48:54 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/07 17:41:59 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	rotate_a(t_queue *stack_a)
 	if (stack_a->size < 2)
 		return ;
 	first = (t_list *) dequeue(stack_a);
-	first->next = NULL; // Makes sure the first element now points to null when added to the back and not to the new first item in the stack
+	first->next = NULL;
 	stack_a->back = (t_queue_node *) first;
 	lst = (t_list **) &stack_a->front;
 	ft_lstadd_back(lst, first);
@@ -45,17 +45,14 @@ void	rotate_a(t_queue *stack_a)
 
 void	rrotate_a(t_queue *stack_a)
 {
-	t_list	*head;
-	t_list	*lst;
-	// t_list	**lst_dp;
-	t_list	*new_back;
+	t_list			*head;
+	t_list			*lst;
+	t_list			*new_back;
 	t_queue_node	*prev_back;
 
-	// lst_dp = NULL;
 	if (stack_a->size < 2)
 		return ;
 	lst = (t_list *) stack_a->front;
-	// lst_dp = (t_list **) &stack_a->front;
 	head = lst;
 	while (head->next != NULL)
 	{
