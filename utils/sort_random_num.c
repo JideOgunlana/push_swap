@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 14:04:46 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/05 03:32:50 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/07 04:38:31 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,6 +191,7 @@ int is_chunk_ordered(t_stack *stack_b, int chunk_size)
         {
             arr[j + 1] = arr[j];
             j--;
+			free(arr);
 			return (0);
         }
         arr[j + 1] = key;
@@ -233,6 +234,7 @@ int	is_ordered(t_queue *stack_a)
         {
             arr[j + 1] = arr[j];
             j--;
+			free(arr);
 			return (0);
         }
         arr[j + 1] = key;

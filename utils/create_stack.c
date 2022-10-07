@@ -6,13 +6,13 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 18:33:48 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/05 00:48:21 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/06 20:01:28 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	create_stack(t_stack *s)
+void	init_stack_b(t_stack *s)
 {
 	s->size = 0;
 }

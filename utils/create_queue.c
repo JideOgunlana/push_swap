@@ -6,13 +6,13 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 18:33:50 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/05 16:23:07 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/06 19:58:42 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	create_queue(t_queue *stack_a)
+void	inint_stack_a(t_queue *stack_a)
 {
 	stack_a->size = 0;
 }

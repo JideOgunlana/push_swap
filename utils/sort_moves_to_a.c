@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 18:39:44 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/06 00:31:45 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/06 23:08:13 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ void	move_chunks_to_a(t_stack *stack_b, t_queue *stack_a, t_chunks **chunks, int
 {
 	t_sort_chunk	*sort_chunk;
 
-	sort_chunk = (t_sort_chunk *)malloc(sizeof(t_sort_chunk));
+	sort_chunk = (t_sort_chunk *) malloc(sizeof(t_sort_chunk));
 	if (!sort_chunk)
 		return ;
 	sort_chunk->total_chunks = total_chunks;
@@ -188,4 +188,5 @@ void	move_chunks_to_a(t_stack *stack_b, t_queue *stack_a, t_chunks **chunks, int
 	{
 		sort_chunks_in_b(stack_b, stack_a, sort_chunk, chunks);
 	}
+	free(sort_chunk);
 }

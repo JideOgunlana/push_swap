@@ -6,17 +6,17 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 21:28:21 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/05 00:48:21 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/07 05:31:48 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-int	check_passed_vals(char *str)
+int	check_invalid_vals(char *str)
 {
 	int	i;
 
-	// // // // // printf("[ERROR_CHECKERS.C] string: %s\n", str);
+	// printf("[ERROR_CHECKERS.C] string: %s\n", str);
 	i = 0;
 	if (str[i] == '\0')
 		return (1);
@@ -47,4 +47,12 @@ int	check_duplicates(t_queue *stack_a)
 		head = head->next;
 	}
 	return (0);
+}
+
+void	error_message(void)
+{
+	ft_putstr_fd("\x1b[1;31m", STDERR_FILENO);
+	ft_putstr_fd("Error", STDERR_FILENO);
+	// ft_putstr_fd("Contains value that is not a number", STDERR_FILENO);
+	ft_putstr_fd("\x1B[0m\n", STDERR_FILENO);
 }

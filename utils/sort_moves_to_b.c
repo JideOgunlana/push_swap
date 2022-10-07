@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 14:17:32 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/05 23:10:50 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/07 00:17:01 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,6 +176,8 @@ void	check_op_to_b(t_queue *stack_a, t_stack *stack_b, int *temp_chunk, int chun
 			helper->head_a = helper->head_a->next;
 		helper->head_a_moves++;
 	}
+	free(temp);
+	free(helper);
 }
 
 // Improve this function to check if rotating or reversing is a better option
@@ -192,5 +194,7 @@ void	move_chunks_to_b(t_queue *stack_a, t_stack *stack_b, int chunk_size)
 		i++;
 	}
 	check_op_to_b(stack_a, stack_b, temp_chunk, chunk_size);
+	free(temp_arr);
+	free(temp_chunk);
 	// exit(0);
 }
