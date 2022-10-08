@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 18:21:23 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/07 18:48:35 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/08 20:47:04 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ typedef struct s_temp_chunks
 	int	total_rr;
 	int	first;
 	int	last;
-}				t_temp_chunks;
+}				t_tmp_chk;
 
 /*
 ====================================================================
@@ -108,7 +108,7 @@ typedef struct s_pswap
 {
 	t_chunks	**chunks;
 	t_chunks	*set;
-	int			total_chunks;
+	int			t_chks;
 	int			temp_stack_a_size;
 	int			set_count;
 	int			median;
@@ -125,7 +125,7 @@ typedef struct s_chunk_helper
 	int				head_a_moves;
 	int				hold_chunk_size;
 	int				i;
-}				t_chunk_helper;
+}				t_ch_help;
 
 /*
 ====================================================================
@@ -138,14 +138,14 @@ typedef struct s_sort_chunk
 	int				head_b_moves;
 	int				chunk_size;
 	int				median;
-	int				*descending_arr;
+	int				*d_arr;
 	int				rotations;
 	int				push_to_a_state;
 	int				items_at_top_count;
 	int				search_index;
-	int				search_val;
+	int				sch_val;
 	int				search_at_top;
-	int				total_chunks;
+	int				t_chks;
 	int				temp_items_at_top;
 	t_stack_node	*temp_head_b;
 }				t_sort_chunk;
@@ -234,7 +234,7 @@ int				*gen_ascending_chunk(t_queue *stack_a);
 void			stack_b_has_two(t_queue *stack_a, t_stack *stack_b);
 void			stack_b_has_three(t_queue *stack_a, t_stack *stack_b);
 void			stack_b_has_three_chunks(t_queue *stack_a, t_stack *stack_b);
-void			move_chunks_to_b(t_queue *a, t_stack *b, int chunk_size);
+void			m_chk_to_b(t_queue *a, t_stack *b, int chunk_size);
 void			move_chunks_to_a(t_stack *b, t_queue *a, t_chunks **c, int t_c);
 
 /*
@@ -244,16 +244,16 @@ void			move_chunks_to_a(t_stack *b, t_queue *a, t_chunks **c, int t_c);
 */
 t_chunks		*get_chunk_set(t_queue *stack_a, int set_count);
 t_chunks		*get_chunk_set_l(t_queue *stack_a, int set_count);
-t_chunks		*get_chunk_set_xl(t_queue *stack_a, int set_count);
+t_chunks		*get_chk_set_xl(t_queue *stack_a, int set_count);
 void			check_split_arg(t_stacks *stacks);
 void			check_arg(t_stacks *stacks, char *argv[]);
 void			enqueue_stack_a(t_stacks *stacks);
 void			parse_args(t_stacks *stacks, int argc, char *argv[]);
 int				init_stacks(t_stacks *stacks);
 void			sort_chunk_in_a(t_stacks *stacks, t_pswap *pswap);
-void			get_total_chunks(t_stacks *stacks, t_pswap *pswap);
-void			get_total_chunks_l(t_stacks *stacks, t_pswap *pswap);
-void			get_total_chunks_xl(t_stacks *stacks, t_pswap *pswap);
+void			get_t_chks(t_stacks *stacks, t_pswap *pswap);
+void			get_t_chks_l(t_stacks *stacks, t_pswap *pswap);
+void			get_t_chks_xl(t_stacks *stacks, t_pswap *pswap);
 void			init_temp_stack(t_pswap *pswap);
 void			is_sort_needed_xl(t_stacks *stacks, t_pswap *pswap);
 void			is_sort_needed_l(t_stacks *stacks, t_pswap *pswap);
@@ -261,6 +261,20 @@ void			is_sort_needed(t_stacks *stacks, t_pswap *pswap);
 void			push_swap(t_stacks *stacks, t_pswap *pswap);
 void			check_split_arg_is_int(t_stacks *stacks);
 void			check_arg_is_int(t_stacks *stacks);
-
+void			check_m(t_queue *a, t_stack *b, t_tmp_chk *t, t_ch_help *h);
+void			m_chk_item(t_queue *a, t_stack *b, t_tmp_chk *t, t_ch_help *h);
+void			m_chk_i_h(t_queue *a, t_stack *b, t_tmp_chk *t, t_ch_help *h);
+void			m_l_chk_i(t_queue *a, t_stack *b, t_tmp_chk *t, t_ch_help *h);
+void			m_a(t_queue *a, t_stack *b, t_sort_chunk *s_c, t_chunks **c);
+void			find_val_in_chunk(t_stack *stack_b, t_sort_chunk *sc);
+void			m_sorted_chk(t_queue *a, t_stack *b, t_sort_chunk *sc);
+void			val_in_a(t_queue *stack_a, t_tmp_chk *temp, t_ch_help *helper);
+void			rra(t_queue *stack_a, t_tmp_chk *temp);
+void			ra(t_queue *stack_a, t_tmp_chk *temp);
+void			init_ch_help(t_ch_help *h, int chunk_size, t_queue *a);
+void			init_temp_chunk(t_tmp_chk *temp);
+void			free_stack_helper(t_tmp_chk *temp, t_ch_help *helper);
+void			sort_chunk_in_a(t_stacks *stacks, t_pswap *pswap);
+void			sort_chunk_in_a_helper(t_stacks *stacks, t_pswap *pswap);
 
 #endif

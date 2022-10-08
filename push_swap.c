@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 19:58:27 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/07 18:52:00 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/08 20:11:14 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,19 @@ void	push_swap(t_stacks *stacks, t_pswap *pswap)
 {
 	if (stacks->stack_a->size == 500)
 	{
-		get_total_chunks_xl(stacks, pswap);
+		get_t_chks_xl(stacks, pswap);
 		init_temp_stack(pswap);
 		is_sort_needed_xl(stacks, pswap);
 	}
 	else if (stacks->stack_a->size == 100)
 	{
-		get_total_chunks_l(stacks, pswap);
+		get_t_chks_l(stacks, pswap);
 		init_temp_stack(pswap);
 		is_sort_needed_l(stacks, pswap);
 	}
 	else
 	{
-		get_total_chunks(stacks, pswap);
+		get_t_chks(stacks, pswap);
 		init_temp_stack(pswap);
 		is_sort_needed(stacks, pswap);
 	}

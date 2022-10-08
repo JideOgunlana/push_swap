@@ -8,11 +8,11 @@ RM = rm -f
 
 # LIBFT_OBJ = ./includes/libft/libft.a
 
-UTILS_SRC =	utils/create_queue utils/create_stack utils/error_checkers \
-			utils/stack_a_b_ops utils/stack_a_operations \
-			utils/stack_utils utils/stack_b_operations \
-			utils/sort_moves_to_a utils/sort_moves_to_b utils/sort_random_num \
-			utils/sort_push_algo utils/chunk_algo utils/sort_to_a_helper
+UTILS_SRC =	utils/chunk_algo utils/chunks_to_a_helper utils/chunks_to_a utils/chunks_to_b_helper utils/chunks_to_b \
+			utils/create_queue utils/create_stack utils/error_checkers utils/move_to_a_helper utils/move_to_a \
+			utils/move_to_b_helper1 utils/move_to_b_helper2 utils/move_to_b utils/parse_args_for_a utils/parse_total_chunks_a \
+			utils/sort_check utils/sort_insertion_algo utils/sort_random_num \
+			utils/stack_a_b_ops utils/stack_a_ops utils/stack_b_ops
 
 MAIN_SRC	= push_swap
 

@@ -6,13 +6,13 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 18:43:14 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/07 18:19:37 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/08 20:19:17 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-t_chunks	*get_chunk_set_xl(t_queue *stack_a, int set_count)
+t_chunks	*get_chk_set_xl(t_queue *stack_a, int set_count)
 {
 	t_chunks	*set;
 
