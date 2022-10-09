@@ -6,33 +6,11 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 22:36:50 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/09 04:18:35 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/09 04:29:55 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
-
-void	checker_pass_mess(void)
-{
-	ft_putstr_fd("\x1b[1;32m", STDOUT_FILENO);
-	ft_putstr_fd("OK", STDOUT_FILENO);
-	ft_putstr_fd("\x1B[0m\n", STDOUT_FILENO);
-}
-
-void	checker_err_mess(void)
-{
-	ft_putstr_fd("\x1b[1;31m", STDOUT_FILENO);
-	ft_putstr_fd("KO", STDOUT_FILENO);
-	ft_putstr_fd("\x1B[0m\n", STDOUT_FILENO);
-}
-
-void	is_stack_sorted(t_stacks *stacks)
-{
-	if (is_ordered(stacks->stack_a))
-		checker_pass_mess();
-	else
-		checker_err_mess();
-}
 
 void	instruction_invalid(void)
 {
@@ -92,6 +70,8 @@ void	checker(t_stacks *stacks, char *line)
 			{
 				checker_err_mess();
 				display(stacks->stack_a);
+				print_stack(stacks->stack_b);
+				system("leaks checker");
 				exit(EXIT_SUCCESS);
 			}
 			is_stack_sorted(stacks);
