@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_b_operations.c                               :+:      :+:    :+:   */
+/*   stack_b_ops.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 18:37:59 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/07 17:42:41 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/09 01:58:48 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	rotate_b(t_stack *stack_b)
 	lst = (t_list **) &stack_b->s_nodes;
 	ft_lstadd_back(lst, first);
 	stack_b->size++;
+	if (stack_b->no_print)
+		return ;
 	ft_putstr_fd("rb\n", STDOUT_FILENO);
 }
 
@@ -46,6 +48,8 @@ void	rrotate_b(t_stack *stack_b)
 	}
 	ft_lstadd_front(lst_dp, ft_lstlast(lst));
 	new_back->next = NULL;
+	if (stack_b->no_print)
+		return ;
 	ft_putstr_fd("rrb\n", STDOUT_FILENO);
 }
 
@@ -61,6 +65,8 @@ void	swap_b(t_stack *stack_b)
 	first->next = second->next;
 	stack_b->s_nodes = second;
 	stack_b->s_nodes->next = first;
+	if (stack_b->no_print)
+		return ;
 	ft_putstr_fd("sb\n", STDOUT_FILENO);
 }
 
@@ -75,5 +81,7 @@ void	push_a(t_stack *stack_b, t_queue *stack_a)
 	lst = (t_list **) &stack_a->front;
 	ft_lstadd_front(lst, removed_node);
 	stack_a->size++;
+	if (stack_b->no_print)
+		return ;
 	ft_putstr_fd("pa\n", STDOUT_FILENO);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_a_operations.c                               :+:      :+:    :+:   */
+/*   stack_a_ops.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 18:41:30 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/07 17:41:59 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/09 02:00:00 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	swap_a(t_queue *stack_a)
 	first->next = second->next;
 	stack_a->front = second;
 	stack_a->front->next = first;
+	if (stack_a->no_print)
+		return ;
 	ft_putstr_fd("sa\n", STDOUT_FILENO);
 }
 
@@ -40,6 +42,8 @@ void	rotate_a(t_queue *stack_a)
 	lst = (t_list **) &stack_a->front;
 	ft_lstadd_back(lst, first);
 	stack_a->size++;
+	if (stack_a->no_print)
+		return ;
 	ft_putstr_fd("ra\n", STDOUT_FILENO);
 }
 
@@ -64,6 +68,8 @@ void	rrotate_a(t_queue *stack_a)
 	prev_back->next = stack_a->front;
 	stack_a->front = prev_back;
 	stack_a->back->next = NULL;
+	if (stack_a->no_print)
+		return ;
 	ft_putstr_fd("rra\n", STDOUT_FILENO);
 }
 
@@ -76,5 +82,7 @@ void	push_b(t_queue *stack_a, t_stack *stack_b)
 		return ;
 	push(stack_b, removed_node->item);
 	free(removed_node);
+	if (stack_a->no_print)
+		return ;
 	ft_putstr_fd("pb\n", STDOUT_FILENO);
 }

@@ -6,13 +6,13 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 18:33:50 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/08 17:22:31 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/09 04:09:24 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	inint_stack_a(t_queue *stack_a)
+void	init_stack_a(t_queue *stack_a)
 {
 	stack_a->size = 0;
 }
@@ -63,7 +63,6 @@ t_queue_node	*dequeue(t_queue *stack_a)
 	return (dequeued_node);
 }
 
-/* 
 // Function to display items in stack A
 void	display(t_queue *stack_a)
 {
@@ -72,10 +71,14 @@ void	display(t_queue *stack_a)
 	if (stack_a->size == 0)
 		return ;
 	head = stack_a->front;
-	printf("\nElements in Stack A\n");
+	ft_putstr_fd("\x1b[1;36m", STDOUT_FILENO);
+	ft_putstr_fd("-------------------------------", STDOUT_FILENO);
+	ft_putstr_fd("\x1B[0m\n", STDOUT_FILENO);
+	ft_putstr_fd("Items in Stack A\n", STDOUT_FILENO);
 	while (head)
 	{
-		printf("%d\n", head->item);
+		ft_putnbr_fd(head->item, STDOUT_FILENO);
+		ft_putchar_fd('\n', STDOUT_FILENO);
 		head = head->next;
 	}
-} */
+}

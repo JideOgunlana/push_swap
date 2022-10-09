@@ -6,11 +6,11 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 19:58:27 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/08 20:11:14 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/09 01:10:30 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 void	parse_args(t_stacks *stacks, int argc, char *argv[])
 {
@@ -38,7 +38,7 @@ int	init_stacks(t_stacks *stacks)
 	stacks->stack_b = (t_stack *) malloc(sizeof(t_stack));
 	if (!stacks->stack_a || !stacks->stack_b)
 		return (0);
-	inint_stack_a(stacks->stack_a);
+	init_stack_a(stacks->stack_a);
 	init_stack_b(stacks->stack_b);
 	stacks->split = NULL;
 	return (1);
@@ -89,35 +89,4 @@ void	clean_up(t_stacks *stacks, t_pswap *pswap)
 	}
 	free(pswap->chunks);
 	free(pswap);
-}
-
-/*
-	Analyze arguments passed
-	If there are no Errors, create chunks and sort the numbers
-*/
-int	main(int argc, char *argv[])
-{
-	t_stacks	*stacks;
-	t_pswap		*pswap;
-
-	stacks = (t_stacks *) malloc(sizeof(t_stacks));
-	pswap = (t_pswap *) malloc(sizeof(t_pswap));
-	if (!stacks || !pswap)
-		return (0);
-	if (argc < 2)
-		return (EXIT_SUCCESS);
-	if (!init_stacks(stacks))
-		return (EXIT_SUCCESS);
-	parse_args(stacks, argc, argv);
-	push_swap(stacks, pswap);
-	// Show the Stacks After applying the sorting algorithm
-/* 
-	ft_putstr_fd("\n\x1b[1;33m", STDERR_FILENO);
-	printf("\nAfter applying sorting algorithm, We've got:\x1B[0m\n");
-	display(stacks->stack_a);
- */
-	// clean up used memory
-	clean_up(stacks, pswap);
-	// system("leaks push_swap");
-	return (EXIT_SUCCESS);
 }
