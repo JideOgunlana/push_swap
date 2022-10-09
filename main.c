@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 23:03:28 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/08 23:04:01 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/09 04:19:08 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,6 @@ int	main(int argc, char *argv[])
 		return (EXIT_SUCCESS);
 	parse_args(stacks, argc, argv);
 	push_swap(stacks, pswap);
-	// Show the Stacks After applying the sorting algorithm
-/* 
-	ft_putstr_fd("\n\x1b[1;33m", STDERR_FILENO);
-	printf("\nAfter applying sorting algorithm, We've got:\x1B[0m\n");
-	display(stacks->stack_a);
- */
-	// clean up used memory
 	clean_up(stacks, pswap);
-	// system("leaks push_swap");
 	return (EXIT_SUCCESS);
 }

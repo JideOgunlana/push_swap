@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 22:36:50 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/09 04:12:23 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/09 04:18:35 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	checker_pass_mess(void)
 	ft_putstr_fd("OK", STDOUT_FILENO);
 	ft_putstr_fd("\x1B[0m\n", STDOUT_FILENO);
 }
+
 void	checker_err_mess(void)
 {
 	ft_putstr_fd("\x1b[1;31m", STDOUT_FILENO);
