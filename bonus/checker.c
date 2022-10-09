@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 22:36:50 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/09 20:29:00 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/09 20:45:31 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,6 @@ void	checker(t_stacks *stacks, char *line)
 			if (stacks->stack_b->size > 0)
 			{
 				checker_err_mess();
-				display(stacks->stack_a);
-				print_stack(stacks->stack_b);
-				system("leaks checker");
 				exit(EXIT_SUCCESS);
 			}
 			is_stack_sorted(stacks);
@@ -79,8 +76,6 @@ void	checker(t_stacks *stacks, char *line)
 			exit(EXIT_SUCCESS);
 		}
 		read_instructions(stacks, line);
-		display(stacks->stack_a);
-		print_stack(stacks->stack_b);
 		free(line);
 		line = get_next_line(0);
 	}
