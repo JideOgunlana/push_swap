@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 18:33:50 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/09 04:09:24 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/09 20:39:41 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	init_stack_a(t_queue *stack_a)
 t_queue_node	*new_node(t_queue *stack_a, int new_item)
 {
 	stack_a->node = (t_queue_node *) malloc(sizeof(t_queue_node));
+	if (!stack_a->node)
+		exit(EXIT_SUCCESS);
 	if (!stack_a->node)
 		return (NULL);
 	stack_a->node->item = new_item;

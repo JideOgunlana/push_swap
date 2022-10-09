@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 22:36:50 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/09 04:29:55 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/09 20:29:00 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	checker(t_stacks *stacks, char *line)
 		free(line);
 		line = get_next_line(0);
 	}
+	is_stack_sorted(stacks);
 }
 
 int	main(int argc, char *argv[])

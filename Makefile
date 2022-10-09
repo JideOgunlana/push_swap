@@ -1,13 +1,10 @@
 NAME = push_swap
 BONUS_NAME = checker
-PUSH_SWAP = push_swap.a
 
 CC = cc
 CFLAGS = -Wall -Werror -Wextra
 AR = ar rcs
 RM = rm -f
-
-# LIBFT_OBJ = ./includes/libft/libft.a
 
 UTILS_SRC =	utils/chunk_algo utils/chunks_to_a_helper utils/chunks_to_a utils/chunks_to_b_helper utils/chunks_to_b \
 			utils/create_queue utils/create_stack utils/error_checkers utils/move_to_a_helper utils/move_to_a \
@@ -29,31 +26,37 @@ UTILS_OBJS = ./$(addsuffix .o, $(UTILS_SRC))
 MAIN_OBJ = ./$(addsuffix .o, $(MAIN_SRC))
 BONUS_OBJ = ./$(addsuffix .o, $(BONUS_SRC))
 
-all: lib $(NAME)
+all: lib $(NAME) 
 
 .c.o: $(MAIN) $(UTILS)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 lib:
-	@$(MAKE) bonus -C ./includes/libft/
+	@$(MAKE) -C ./includes/libft/
 
-
-$(NAME): $(MAIN_OBJ) $(UTILS_OBJS) lib bonus
-	@cp ./includes/libft/libft.a ./utils/
-	$(CC) $(CFLAGS) $(MAIN_OBJ) $(UTILS_OBJS) ./utils/libft.a -o $(NAME)
+$(NAME): $(MAIN_OBJ) $(UTILS_OBJS) $(BONUS_OBJ)
+	@cp ./includes/libft/libft.a ./
+	$(CC) $(CFLAGS) $(MAIN_OBJ) $(UTILS_OBJS) ./libft.a -o $(NAME)
+	$(CC) $(CFLAGS) $(BONUS_OBJ) $(UTILS_OBJS) ./libft.a ./includes/gnl/get_next_line.c ./includes/gnl/get_next_line_utils.c -o bonus/$(BONUS_NAME)
+	@echo "\x1b[1;32m"
+	@echo COMPILED
 
 clean:
 	@make fclean -C ./includes/libft
-	$(RM) $(UTILS_OBJS) $(MAIN_OBJ) $(BONUS_OBJ) $(PUSH_SWAP)
+	$(RM) $(UTILS_OBJS) $(MAIN_OBJ) $(BONUS_OBJ)
+	@echo "\x1b[1;33m"
+	@echo CLEANED
+	@echo "\x1B[0m\n"
 
 fclean: clean
-	@/bin/rm -f ./utils/libft.a
+	@/bin/rm -f ./libft.a
 	$(RM) $(NAME) bonus/$(BONUS_NAME)
+	@echo FULL CLEAN
 
-bonus: lib $(BONUS_OBJ) $(UTILS_OBJS)
-	@cp ./includes/libft/libft.a ./utils/
-	$(CC) $(CFLAGS) $(BONUS_OBJ) $(UTILS_OBJS) ./utils/libft.a ./includes/gnl/get_next_line.c ./includes/gnl/get_next_line_utils.c -o bonus/$(BONUS_NAME)
+bonus: all
+	@echo BONUS COMPILED
 
 re: fclean all
+	@echo REMAKING COMPLETED
 
 .PHONY: clean fclean re libft all bonus

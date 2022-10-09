@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 19:58:27 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/09 01:10:30 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/09 20:37:16 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@ void	parse_args(t_stacks *stacks, int argc, char *argv[])
 	while (stacks->i < argc)
 	{
 		if (ft_strlen(argv[stacks->i]) > 0)
-		{
 			stacks->split = ft_split(argv[stacks->i], ' ');
-		}
 		check_arg(stacks, argv);
 		enqueue_stack_a(stacks);
 		stacks->i++;

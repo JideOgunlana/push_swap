@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 18:33:06 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/08 20:39:25 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/09 20:41:01 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	init_temp_stack(t_pswap *pswap)
 	pswap->set = (t_chunks *)malloc(sizeof(t_chunks));
 	pswap->chunks = (t_chunks **)malloc(sizeof(pswap->set) * pswap->t_chks);
 	if (!pswap->chunks || !pswap->set)
-		exit(0);
+		exit(EXIT_SUCCESS);
 }
 
 /* 
