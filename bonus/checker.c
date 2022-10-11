@@ -6,13 +6,13 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 22:36:50 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/09 21:15:39 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/11 11:55:21 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	instruction_invalid(void)
+void	invalid_instruction(void)
 {
 	ft_putstr_fd("\x1b[1;31m", STDOUT_FILENO);
 	ft_putstr_fd("Error", STDOUT_FILENO);
@@ -20,7 +20,7 @@ void	instruction_invalid(void)
 	exit(EXIT_SUCCESS);
 }
 
-void	read_instructions(t_stacks *s, char *line)
+void	read_instruction(t_stacks *s, char *line)
 {
 	if (ft_strncmp(line, "pa\n", 4) == 0)
 		push_a(s->stack_b, s->stack_a);
@@ -45,7 +45,7 @@ void	read_instructions(t_stacks *s, char *line)
 	else if (ft_strncmp(line, "rrr\n", 4) == 0)
 		reverse_a_b(s->stack_a, s->stack_b);
 	else
-		instruction_invalid();
+		invalid_instruction();
 }
 
 void	checker_init_stacks(t_stacks *stacks)
@@ -76,7 +76,7 @@ void	checker(t_stacks *stacks, char *line)
 			checker_clean_up(stacks);
 			exit(EXIT_SUCCESS);
 		}
-		read_instructions(stacks, line);
+		read_instruction(stacks, line);
 		free(line);
 		line = get_next_line(0);
 	}
@@ -98,4 +98,5 @@ int	main(int argc, char *argv[])
 	line = get_next_line(0);
 	checker(stacks, line);
 	checker_clean_up(stacks);
+	return (EXIT_SUCCESS);
 }
