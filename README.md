@@ -6,7 +6,7 @@
 
 <br>
 
-```console
+```c
 Init stack a and b =>
 
 4
