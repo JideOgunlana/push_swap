@@ -6,20 +6,16 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 14:04:46 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/08 19:13:42 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/11 17:37:29 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
 /* 
-	Insertion sort program sorts the numbers in Stack A 
-	to realise the limit.
-
-	The limit (median) value is used to determine which numbers
-	for a given chunk in stack A to be pushed to Stack B
+	get an arr of numbers in ascending order using insertion sort
+	on numbers in stack A
  */
-
 int	*gen_ascending_chunk(t_queue *stack_a)
 {
 	t_queue_node	*head;
@@ -41,6 +37,10 @@ int	*gen_ascending_chunk(t_queue *stack_a)
 	return (arr);
 }
 
+/* 
+	get an arr of numbers with a specified size in descending order
+	using insertion sort on numbers in stack B
+ */
 int	*gen_descending_chunk(t_stack *stack_b, int arr_size)
 {
 	t_stack_node	*head;
@@ -62,6 +62,10 @@ int	*gen_descending_chunk(t_stack *stack_b, int arr_size)
 	return (arr);
 }
 
+/* 
+	Get the limit to determine when a chunk (batch) containing
+	certain numbers stop
+*/
 int	get_a_limiter(t_queue *stack_a)
 {
 	t_queue_node	*head;

@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   chunks_to_a.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 18:57:21 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/09 01:53:29 by bogunlan         ###   ########.fr       */
+/*   Updated: 2023/06/06 15:49:50 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
+/* 
+ *	Move the delimiter val to chunk A after all values greater than it have been moved
+ */
 void	mov_chunk_mid_to_a(t_stack *stack_b, t_queue *stack_a, int median)
 {
 	int	k;
@@ -36,6 +39,9 @@ void	mov_chunk_mid_to_a(t_stack *stack_b, t_queue *stack_a, int median)
 	}
 }
 
+/* 
+ *	Move all values lower than the delimiter to stack A for chunks in stack B after all the large values and the delimiting value have been moved
+ */
 void	mov_chunk_sm_a(t_stack *stack_b, t_queue *stack_a, int median)
 {
 	int	k;
@@ -53,6 +59,9 @@ void	mov_chunk_sm_a(t_stack *stack_b, t_queue *stack_a, int median)
 	push_a(stack_b, stack_a);
 }
 
+/* 
+ *	Move values larger than the delimiting value to stack A
+ */
 void	mov_chunk_big_to_a(t_stack *stack_b, t_queue *stack_a)
 {
 	int	k;
@@ -67,6 +76,9 @@ void	mov_chunk_big_to_a(t_stack *stack_b, t_queue *stack_a)
 	}
 }
 
+/* 
+ *	Move the three items left in stack B to A
+ */
 void	stack_b_has_three_chunks(t_queue *stack_a, t_stack *stack_b)
 {
 	int	median;
@@ -74,7 +86,7 @@ void	stack_b_has_three_chunks(t_queue *stack_a, t_stack *stack_b)
 
 	k = 0;
 	median = get_b_limiter(stack_b, 3);
-	if (!is_chunk_ordered(stack_b, 3))
+	if (!is_chunk_b_ordered(stack_b, 3))
 	{
 		if (stack_b->s_nodes->item == median)
 			mov_chunk_mid_to_a(stack_b, stack_a, median);

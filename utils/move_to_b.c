@@ -6,12 +6,16 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 14:17:32 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/08 20:18:15 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/11 17:06:39 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
+/* 
+	Reset the chunk starting postion in A when all items in previous 
+	chunk have been moved to stack B
+*/
 void	reset_chk(t_queue *a, t_stack *b, t_tmp_chk *tmp, t_ch_help *h)
 {
 	check_m(a, b, tmp, h);
@@ -20,6 +24,10 @@ void	reset_chk(t_queue *a, t_stack *b, t_tmp_chk *tmp, t_ch_help *h)
 	h->head_a = a->front;
 }
 
+/* 
+	Help fxn for check_op_to_b
+	Determine where the head position is
+*/
 void	helper_head_moves(t_ch_help *helper)
 {
 	if (helper->head_a_moves != -1)
@@ -27,12 +35,21 @@ void	helper_head_moves(t_ch_help *helper)
 	helper->head_a_moves++;
 }
 
+/* 
+	Help fxn for check_op_to_b
+	Deallocates memory allocated to helper pointers temp
+	and helper
+*/
 void	helper_malloc_fail(t_tmp_chk *temp, t_ch_help *helper)
 {
 	if (!temp || !helper)
 		exit(EXIT_SUCCESS);
 }
 
+/*  
+	Check the operation to perform to move items to B for a 
+	particular set of chunk
+*/
 void	check_op_to_b(t_queue *a, t_stack *b, int *tmp_chk, int chk_size)
 {
 	t_tmp_chk	*temp;
@@ -62,6 +79,9 @@ void	check_op_to_b(t_queue *a, t_stack *b, int *tmp_chk, int chk_size)
 	free_stack_helper(temp, helper);
 }
 
+/* 
+	Move the items in chunks to B from smallest vals to largest
+*/
 void	m_chk_to_b(t_queue *stack_a, t_stack *stack_b, int chk_size)
 {
 	int	*temp_arr;

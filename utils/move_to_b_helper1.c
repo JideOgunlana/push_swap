@@ -6,16 +6,13 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 18:33:06 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/09 20:41:01 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/11 17:52:34 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-/* 
-
- */
-void	init_temp_stack(t_pswap *pswap)
+void	create_temp_stack(t_pswap *pswap)
 {
 	pswap->set = (t_chunks *)malloc(sizeof(t_chunks));
 	pswap->chunks = (t_chunks **)malloc(sizeof(pswap->set) * pswap->t_chks);
@@ -24,11 +21,11 @@ void	init_temp_stack(t_pswap *pswap)
 }
 
 /* 
-	Check for need to move items to stack B if numbers are not ordered
- */
+	Check for need to sort to move items to stack B if numbers are not ordered
+*/
 void	is_sort_needed(t_stacks *s, t_pswap *p)
 {
-	if (is_ordered(s->stack_a))
+	if (is_chunk_a_ordered(s->stack_a))
 		exit(EXIT_SUCCESS);
 	p->set_count = 0;
 	while (s->stack_a->size > 3)
@@ -44,7 +41,7 @@ void	is_sort_needed(t_stacks *s, t_pswap *p)
 
 void	is_sort_needed_l(t_stacks *s, t_pswap *p)
 {
-	if (is_ordered(s->stack_a))
+	if (is_chunk_a_ordered(s->stack_a))
 		exit(EXIT_SUCCESS);
 	else
 	{
@@ -63,7 +60,7 @@ void	is_sort_needed_l(t_stacks *s, t_pswap *p)
 
 void	is_sort_needed_xl(t_stacks *s, t_pswap *p)
 {
-	if (is_ordered(s->stack_a))
+	if (is_chunk_a_ordered(s->stack_a))
 		exit(EXIT_SUCCESS);
 	else
 	{

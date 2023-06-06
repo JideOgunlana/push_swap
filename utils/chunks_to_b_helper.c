@@ -6,12 +6,15 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 17:43:28 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/08 19:42:56 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/11 15:28:08 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
+/* 
+	Initialize temp storage to help decide best movements to make
+ */
 void	init_temp_chunk(t_tmp_chk *temp)
 {
 	temp->r = 0;
@@ -22,6 +25,9 @@ void	init_temp_chunk(t_tmp_chk *temp)
 	temp->total_rr = 0;
 }
 
+/* 
+	Initialize another temp storage to help sort the chunks in order
+ */
 void	init_ch_help(t_ch_help *helper, int chunk_size, t_queue *stack_a)
 {
 	helper->head_a_moves = 0;
@@ -29,6 +35,9 @@ void	init_ch_help(t_ch_help *helper, int chunk_size, t_queue *stack_a)
 	helper->head_a = stack_a->front;
 }
 
+/* 
+	Repeat the ra operation in the specifed amount of time
+ */
 void	ra(t_queue *stack_a, t_tmp_chk *temp)
 {
 	while (temp->r > 0)
@@ -38,6 +47,9 @@ void	ra(t_queue *stack_a, t_tmp_chk *temp)
 	}
 }
 
+/* 
+	Repeat the rra operation in the specified amount of time
+ */
 void	rra(t_queue *stack_a, t_tmp_chk *temp)
 {
 	while (temp->rr > 0)
@@ -47,6 +59,9 @@ void	rra(t_queue *stack_a, t_tmp_chk *temp)
 	}
 }
 
+/* 
+	Deallocate memory used by temp storage helpers
+ */
 void	free_stack_helper(t_tmp_chk *temp, t_ch_help *helper)
 {
 	free(temp);

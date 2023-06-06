@@ -1,17 +1,20 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   chunks_to_a_helper.c                               :+:      :+:    :+:   */
+/* ***************************************************************************/
+/*                                                                           */
+/*                                                        :::      ::::::::  */
+/*   chunks_to_a_helper.c                               :+:      :+:    :+:  */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 18:59:08 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/09 01:53:30 by bogunlan         ###   ########.fr       */
+/*   Updated: 2023/06/06 15:48:24 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
+/* 
+ *	Move all numbers in a chunk (batch) already ordered in stack B to stack A.
+*/
 void	m_sorted_chk(t_queue *a, t_stack *b, t_sort_chunk *sc)
 {
 	while (sc->chunk_size > 0)
@@ -21,6 +24,9 @@ void	m_sorted_chk(t_queue *a, t_stack *b, t_sort_chunk *sc)
 	}
 }
 
+/* 
+ *	Move top number in a chunk of stack B to stack A after sorting this chunk.
+*/
 void	m_a(t_queue *a, t_stack *b, t_sort_chunk *s_c, t_chunks **c)
 {
 	push_a(b, a);
@@ -29,6 +35,11 @@ void	m_a(t_queue *a, t_stack *b, t_sort_chunk *s_c, t_chunks **c)
 	s_c->items_at_top_count = c[s_c->t_chks - 1]->data - s_c->rotations;
 }
 
+/*
+ *	Helper fxn for search_val
+ *	Reverse rotate stack B to move item found at bottom to top,
+ *	as this makes lesser moves
+*/
 void	found_at_bottom(t_stack *stack_b, t_sort_chunk *sc)
 {
 	int	y;
@@ -47,6 +58,12 @@ void	found_at_bottom(t_stack *stack_b, t_sort_chunk *sc)
 	sc->head_b = stack_b->s_nodes;
 }
 
+/*
+ *	Helper fxn for fin_val_in_chunk
+ *	Find the val to be pushed to stack A when a chunk
+ *	in stack B contains at least two items.
+ *	Get the highest value in the chunk.
+*/
 void	serach_val(t_stack *stack_b, t_sort_chunk *sc)
 {
 	sc->temp_items_at_top = sc->items_at_top_count;
@@ -55,9 +72,7 @@ void	serach_val(t_stack *stack_b, t_sort_chunk *sc)
 	while (sc->temp_items_at_top > 0)
 	{
 		if (sc->temp_head_b->item == sc->sch_val)
-		{
 			sc->search_at_top = 1;
-		}
 		sc->temp_head_b = sc->temp_head_b->next;
 		sc->temp_items_at_top--;
 	}
@@ -71,6 +86,9 @@ void	serach_val(t_stack *stack_b, t_sort_chunk *sc)
 		found_at_bottom(stack_b, sc);
 }
 
+/* 
+ *	Find the value to push to stack A from a given chunk in stack B.
+*/
 void	find_val_in_chunk(t_stack *stack_b, t_sort_chunk *sc)
 {
 	if (sc->items_at_top_count > 1)

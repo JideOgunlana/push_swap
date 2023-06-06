@@ -6,14 +6,15 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 19:09:24 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/08 20:43:06 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/11 17:28:14 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
 /* 
-	Checking B chunk in descending order
+	Helper fxn for is_chunk_b_ordered
+	Check chunk in B is in descending order
  */
 int	check_order_in_b(int *arr, int chunk_size)
 {
@@ -39,7 +40,10 @@ int	check_order_in_b(int *arr, int chunk_size)
 	return (1);
 }
 
-int	is_chunk_ordered(t_stack *stack_b, int chunk_size)
+/* 
+	Check for ordering in chunks in B
+ */
+int	is_chunk_b_ordered(t_stack *stack_b, int chunk_size)
 {
 	t_stack_node	*head;
 	int				*arr;
@@ -63,8 +67,9 @@ int	is_chunk_ordered(t_stack *stack_b, int chunk_size)
 	return (1);
 }
 
-/* 
-	Checking the whole of stack A in ascending order
+/*
+	Helper fxn for is_chunk_a_ordered
+	Checking the whole of stack A is in ascending order
  */
 int	check_order_in_a(int *arr, t_queue *stack_a)
 {
@@ -90,7 +95,10 @@ int	check_order_in_a(int *arr, t_queue *stack_a)
 	return (1);
 }
 
-int	is_ordered(t_queue *stack_a)
+/*
+	Check for ordering of all numbers in A
+*/
+int	is_chunk_a_ordered(t_queue *stack_a)
 {
 	t_queue_node	*head;
 	int				*arr;

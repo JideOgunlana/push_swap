@@ -6,12 +6,15 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 18:39:44 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/09 01:53:16 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/11 17:27:04 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
+/* 
+	Move found item to a
+*/
 int	m_f_i_to_a(t_stack *b, t_queue *a, t_sort_chunk *sc, t_chunks **chk)
 {
 	int	y;
@@ -38,6 +41,10 @@ int	m_f_i_to_a(t_stack *b, t_queue *a, t_sort_chunk *sc, t_chunks **chk)
 	return (0);
 }
 
+/* 
+	Search stack B for the highest val in its chunk to move to A and,
+	Move the found item to A
+*/
 void	search_and_m(t_stack *b, t_queue *a, t_sort_chunk *sc, t_chunks **chk)
 {
 	while (chk[sc->t_chks - 1]->data > 0)
@@ -63,6 +70,9 @@ void	search_and_m(t_stack *b, t_queue *a, t_sort_chunk *sc, t_chunks **chk)
 	}
 }
 
+/* 
+	Initialize the pointer to help to sort set of numbers in B chunk
+*/
 void	init_chunks(t_stack *b, t_sort_chunk *sc, t_chunks **chk)
 {
 	sc->head_b = b->s_nodes;
@@ -73,13 +83,17 @@ void	init_chunks(t_stack *b, t_sort_chunk *sc, t_chunks **chk)
 	sc->items_at_top_count = chk[sc->t_chks - 1]->data;
 }
 
+/* 
+	Sort the chunks placing the highest val to the top
+	the highest val of the chunk is moved to stack A
+*/
 void	sort_chk_b(t_stack *b, t_queue *a, t_sort_chunk *sc, t_chunks **chk)
 {
 	while (sc->t_chks > 0)
 	{
 		sc->median = get_b_limiter(b, chk[sc->t_chks - 1]->data);
 		sc->chunk_size = chk[sc->t_chks - 1]->data;
-		if (is_chunk_ordered(b, sc->chunk_size))
+		if (is_chunk_b_ordered(b, sc->chunk_size))
 			m_sorted_chk(a, b, sc);
 		else
 		{
@@ -102,6 +116,10 @@ void	sort_chk_b(t_stack *b, t_queue *a, t_sort_chunk *sc, t_chunks **chk)
 	}
 }
 
+/* 
+	Check the size of B to determine how to sort and move
+	items back to A
+*/
 void	move_chunks_to_a(t_stack *b, t_queue *a, t_chunks **chk, int t_chks)
 {
 	t_sort_chunk	*sc;
