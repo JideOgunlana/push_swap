@@ -106,14 +106,15 @@ Here are list of operations push_swap can use:
 
 ## Usage
 You can compile and run the program by using these commands
-```console
+
+``` bash
 make; ./push_swap 3 2 1;
 ```
 
 <br/>
 
 ### Using the checker
-``` console
+``` bash
 make;
 ARG="3 2 1"; ./push_swap $ARG | ./bonus/checker $ARG;
 ```
