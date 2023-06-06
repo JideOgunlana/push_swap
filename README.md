@@ -111,8 +111,6 @@ You can compile and run the program by using these commands
 make; ./push_swap 3 2 1;
 ```
 
-<br/>
-
 ### Using the checker
 ``` bash
 make;
