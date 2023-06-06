@@ -1,5 +1,7 @@
 # PUSH SWAP
 
+<br/>
+
 ## Summary
 ### Data Sorting using two stacks a and b
 > *This project focuses on sorting data efficiently on a stack using a limited set of instructions. The main objective is to achieve the lowest possible number of push_swap actions while manipulating various algorithms. The project requires careful consideration and selection of the most appropriate solution out of several possibilities to optimize the data sorting process.*
