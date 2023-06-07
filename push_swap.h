@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 18:21:23 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/11 17:27:22 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/09 21:09:52 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PUSH_SWAP_H
 # define LIMIT_500 45
 # define LIMIT_100 15
+# include <stdio.h>
 # include <stdlib.h>
 # include "./includes/libft/libft.h"
 # include "./includes/gnl/get_next_line.h"
@@ -216,15 +217,15 @@ void			error_message(void);
 
 /*
 ====================================================================
-			push swap helper functions
+			push swap sorting
 ====================================================================
 */
 int				get_a_limiter(t_queue *stack_a);
 int				get_b_limiter(t_stack *stack_b, int arr_size);
 void			*insertion_sort_on_a(t_queue *stack_a, int *arr);
 void			*insertion_sort_on_b(int *arr, int arr_size);
-int				is_chunk_a_ordered(t_queue *stack_a);
-int				is_chunk_b_ordered(t_stack *stack_b, int chunk_size);
+int				is_ordered(t_queue *stack_a);
+int				is_chunk_ordered(t_stack *stack_b, int chunk_size);
 int				*gen_descending_chunk(t_stack *stack_b, int arr_size);
 int				*gen_ascending_chunk(t_queue *stack_a);
 void			stack_b_has_two(t_queue *stack_a, t_stack *stack_b);
@@ -244,7 +245,7 @@ void			sort_chunk_in_a(t_stacks *stacks, t_pswap *pswap);
 void			get_t_chks(t_stacks *stacks, t_pswap *pswap);
 void			get_t_chks_l(t_stacks *stacks, t_pswap *pswap);
 void			get_t_chks_xl(t_stacks *stacks, t_pswap *pswap);
-void			create_temp_stack(t_pswap *pswap);
+void			init_temp_stack(t_pswap *pswap);
 void			is_sort_needed_xl(t_stacks *stacks, t_pswap *pswap);
 void			is_sort_needed_l(t_stacks *stacks, t_pswap *pswap);
 void			is_sort_needed(t_stacks *stacks, t_pswap *pswap);
@@ -270,15 +271,9 @@ void			parse_args(t_stacks *stacks, int argc, char *argv[]);
 void			push_swap(t_stacks *stacks, t_pswap *pswap);
 void			clean_up(t_stacks *stacks, t_pswap *pswap);
 int				init_stacks(t_stacks *stacks);
-
-/*
-====================================================================
-			checker helper functions
-====================================================================
-*/
 void			checker_pass_mess(void);
 void			checker_err_mess(void);
+void			is_stack_sorted(t_stacks *stacks);
 void			checker_clean_up(t_stacks *stacks);
-void			checker_is_stack_sorted(t_stacks *stacks);
 
 #endif

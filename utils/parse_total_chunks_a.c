@@ -6,14 +6,14 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 18:37:41 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/11 17:17:08 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/08 20:42:52 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
 /* 
-	Find the total number of chunks needed to move numbers 
+	Find the total chunk needed to move numbers 
 	from smallest to largest into B
  */
 void	get_t_chks(t_stacks *s, t_pswap *p)

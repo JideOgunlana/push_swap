@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 18:33:48 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/11 17:50:47 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/07 16:52:30 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,6 @@ void	init_stack_b(t_stack *s)
 	s->size = 0;
 }
 
-/* 
-	Create a new node to add to the top of a stack
-*/
 t_stack_node	*new_stack_node(int val)
 {
 	t_stack_node	*top_node;
@@ -32,7 +29,7 @@ t_stack_node	*new_stack_node(int val)
 	return (top_node);
 }
 
-// Check if the stack is empty
+// CHECK IF THE STACK IS EMPTY
 int	is_empty(t_stack *s)
 {
 	if (s->size == 0)
@@ -40,7 +37,7 @@ int	is_empty(t_stack *s)
 	return (0);
 }
 
-// Add a new node (element) to the top of the stack
+// ADD ELEMENTS INTO STACK
 void	push(t_stack *s, int new_item)
 {
 	t_stack_node	*pushed_node;
@@ -62,7 +59,7 @@ void	push(t_stack *s, int new_item)
 	s->size++;
 }
 
-// Remove a node (element) from the top of the stack
+// REMOVE ELEMENT FROM THE TOP OF STACK
 t_stack_node	*pop(t_stack *s)
 {
 	t_stack_node	*popped_node;

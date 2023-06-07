@@ -6,17 +6,12 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 19:06:07 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/11 17:59:31 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/08 20:43:20 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
-/* 
-	Insertion algorithm used by stack A
-	sorts the numbers in ascending order
-	Allows the push_swap program determine the delimiter to
-	sort the numbers
-*/
+
 void	*insertion_sort_on_a(t_queue *stack_a, int *arr)
 {
 	int	step;
@@ -39,12 +34,6 @@ void	*insertion_sort_on_a(t_queue *stack_a, int *arr)
 	return (arr);
 }
 
-/* 
-	Insertion algorithm used by stack B
-	sorts the numbers in descending order
-	Allows the push_swap program determine the delimiter to
-	sort the numbers
-*/
 void	*insertion_sort_on_b(int *arr, int arr_size)
 {
 	int	step;

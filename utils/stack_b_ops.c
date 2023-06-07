@@ -6,16 +6,12 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 18:37:59 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/11 17:38:59 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/09 01:58:48 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-/* 
-	Push_swap operations on stack b to:
-	swap, rotate, revere rotate and push
- */
 void	rotate_b(t_stack *stack_b)
 {
 	t_list	**lst;

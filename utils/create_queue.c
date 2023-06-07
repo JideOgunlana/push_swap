@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 18:33:50 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/11 15:38:28 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/09 20:39:41 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,11 @@ void	init_stack_a(t_queue *stack_a)
 	stack_a->size = 0;
 }
 
-/* 
-	Create a new node to add to the queue
-*/
 t_queue_node	*new_node(t_queue *stack_a, int new_item)
 {
 	stack_a->node = (t_queue_node *) malloc(sizeof(t_queue_node));
+	if (!stack_a->node)
+		exit(EXIT_SUCCESS);
 	if (!stack_a->node)
 		return (NULL);
 	stack_a->node->item = new_item;
@@ -30,9 +29,6 @@ t_queue_node	*new_node(t_queue *stack_a, int new_item)
 	return (stack_a->node);
 }
 
-/* 
-	Add a node to the end of a queue
- */
 void	enqueue(t_queue *stack_a, int val)
 {
 	t_queue_node	*added_node;
@@ -55,9 +51,6 @@ void	enqueue(t_queue *stack_a, int val)
 	stack_a->size++;
 }
 
-/* 
-	Remove a node at the front of a queue
- */
 t_queue_node	*dequeue(t_queue *stack_a)
 {
 	t_queue_node	*dequeued_node;
@@ -72,9 +65,7 @@ t_queue_node	*dequeue(t_queue *stack_a)
 	return (dequeued_node);
 }
 
-/*
-	display items in stack A
-*/
+// Function to display items in stack A
 void	display(t_queue *stack_a)
 {
 	t_queue_node	*head;

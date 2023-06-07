@@ -6,15 +6,12 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 18:36:27 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/11 17:39:57 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/09 04:10:03 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-/* 
-	Display all items in stack
-*/
 void	print_stack(t_stack *s)
 {
 	t_stack_node	*head;
@@ -34,9 +31,6 @@ void	print_stack(t_stack *s)
 	ft_putstr_fd("\x1B[0m\n", STDOUT_FILENO);
 }
 
-/* 
-	Display the first item on the stack
-*/
 void	peek(t_stack *s)
 {
 	if (is_empty(s))

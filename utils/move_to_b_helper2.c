@@ -6,18 +6,18 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 18:39:20 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/11 17:27:22 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/09 01:51:14 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
 /* 
-	Sort the remaining 3 or 2 items not moved to B
+
  */
 void	sort_chunk_in_a(t_stacks *stacks, t_pswap *pswap)
 {
-	if (!is_chunk_a_ordered(stacks->stack_a))
+	if (!is_ordered(stacks->stack_a))
 	{
 		pswap->median = get_a_limiter(stacks->stack_a);
 		if (stacks->stack_a->size < 3)
@@ -30,9 +30,6 @@ void	sort_chunk_in_a(t_stacks *stacks, t_pswap *pswap)
 	}
 }
 
-/*
-	Helper fxn to sort 3 numbers left in A
-*/
 void	sort_chunk_in_a_helper(t_stacks *stacks, t_pswap *pswap)
 {
 	if (stacks->stack_a->front->item == pswap->median)

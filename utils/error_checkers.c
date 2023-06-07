@@ -6,15 +6,12 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 21:28:21 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/11 18:03:45 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/07 16:53:31 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-/* 
-	Check for any value passed that is not a digit
- */
 int	check_invalid_vals(char *str)
 {
 	int	i;
@@ -31,9 +28,6 @@ int	check_invalid_vals(char *str)
 	return (0);
 }
 
-/* 
-	Check the args passed for duplicate entries
-*/
 int	check_duplicates(t_queue *stack_a)
 {
 	t_queue_node	*head;
@@ -54,9 +48,6 @@ int	check_duplicates(t_queue *stack_a)
 	return (0);
 }
 
-/* 
-	Display an error message for wrong format of numbers
- */
 void	error_message(void)
 {
 	ft_putstr_fd("\x1b[1;31m", STDERR_FILENO);

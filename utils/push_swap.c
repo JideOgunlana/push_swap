@@ -6,24 +6,19 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 19:58:27 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/13 10:30:46 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/09 20:37:16 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-/* 
-	Check the args passed for invalid vals and/or duplicates
-*/
 void	parse_args(t_stacks *stacks, int argc, char *argv[])
 {
 	stacks->i = 1;
 	while (stacks->i < argc)
 	{
 		if (ft_strlen(argv[stacks->i]) > 0)
-		{
 			stacks->split = ft_split(argv[stacks->i], ' ');
-		}
 		check_arg(stacks, argv);
 		enqueue_stack_a(stacks);
 		stacks->i++;
@@ -35,9 +30,6 @@ void	parse_args(t_stacks *stacks, int argc, char *argv[])
 	}
 }
 
-/* 
-	Allocate memory to stack A and B used by the push_swap program
-*/
 int	init_stacks(t_stacks *stacks)
 {
 	stacks->stack_a = (t_queue *) malloc(sizeof(t_queue));
@@ -50,35 +42,28 @@ int	init_stacks(t_stacks *stacks)
 	return (1);
 }
 
-/* 
-	Sort the numbers passed depending on the size of numbers
-	passed to the program
-*/
 void	push_swap(t_stacks *stacks, t_pswap *pswap)
 {
 	if (stacks->stack_a->size == 500)
 	{
 		get_t_chks_xl(stacks, pswap);
-		create_temp_stack(pswap);
+		init_temp_stack(pswap);
 		is_sort_needed_xl(stacks, pswap);
 	}
 	else if (stacks->stack_a->size == 100)
 	{
 		get_t_chks_l(stacks, pswap);
-		create_temp_stack(pswap);
+		init_temp_stack(pswap);
 		is_sort_needed_l(stacks, pswap);
 	}
 	else
 	{
 		get_t_chks(stacks, pswap);
-		create_temp_stack(pswap);
+		init_temp_stack(pswap);
 		is_sort_needed(stacks, pswap);
 	}
 }
 
-/* 
-	Deallocate the memory allocated in heap
-*/
 void	clean_up(t_stacks *stacks, t_pswap *pswap)
 {
 	int				i;

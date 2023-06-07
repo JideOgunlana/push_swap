@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 19:07:58 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/11 17:07:55 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/10/08 18:42:18 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,6 @@ void	check_split_arg(t_stacks *stacks)
 	}
 }
 
-/* 
-	Check the passed args are valid or not
-*/
 void	check_arg(t_stacks *stacks, char *argv[])
 {
 	if (stacks->split)
@@ -48,7 +45,7 @@ void	check_arg(t_stacks *stacks, char *argv[])
 }
 
 /* 
-	move item into stack A
+	put values into stack A
  */
 void	enqueue_stack_a(t_stacks *stacks)
 {
