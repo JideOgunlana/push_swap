@@ -29,32 +29,28 @@ BONUS_OBJ = ./$(addsuffix .o, $(BONUS_SRC))
 all: lib $(NAME) 
 
 .c.o: $(MAIN) $(UTILS)
-	$(CC) $(CFLAGS) -c -o $@ $<
+	@$(CC) $(CFLAGS) -c -o $@ $<
 
 lib:
 	@$(MAKE) -C ./includes/libft/
 
 $(NAME): $(MAIN_OBJ) $(UTILS_OBJS) $(BONUS_OBJ)
 	@cp ./includes/libft/libft.a ./
-	$(CC) $(CFLAGS) $(MAIN_OBJ) $(UTILS_OBJS) ./libft.a -o $(NAME)
-	$(CC) $(CFLAGS) $(BONUS_OBJ) $(UTILS_OBJS) ./libft.a ./includes/gnl/get_next_line.c ./includes/gnl/get_next_line_utils.c -o bonus/$(BONUS_NAME)
-	@echo "\x1b[1;32m"
-	@echo COMPILED
+	@$(CC) $(CFLAGS) $(MAIN_OBJ) $(UTILS_OBJS) ./libft.a -o $(NAME)
+	@$(CC) $(CFLAGS) $(BONUS_OBJ) $(UTILS_OBJS) ./libft.a ./includes/gnl/get_next_line.c ./includes/gnl/get_next_line_utils.c -o bonus/$(BONUS_NAME)
+	@printf "\033[1;32mCOMPILED\n"
 
 clean:
 	@make fclean -C ./includes/libft
-	$(RM) $(UTILS_OBJS) $(MAIN_OBJ) $(BONUS_OBJ)
-	@echo "\x1b[1;33m"
-	@echo CLEANED
-	@echo "\x1B[0m\n"
+	@$(RM) $(UTILS_OBJS) $(MAIN_OBJ) $(BONUS_OBJ)
+	@printf "\033[1;33mCLEANED\e[0m\n"
 
 fclean: clean
 	@/bin/rm -f ./libft.a
-	$(RM) $(NAME) bonus/$(BONUS_NAME)
-	@echo FULL CLEAN
-
+	@$(RM) $(NAME) bonus/$(BONUS_NAME)
+	@printf "\033[0;31mFULL CLEAN\e[0m\n"
 bonus: all
-	@echo BONUS COMPILED
+	@printf "${BONUS_NAME} \033[1;32mBONUS COMPILED\n"
 
 re: fclean all
 	@echo REMAKING COMPLETED
