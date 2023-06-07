@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 23:03:28 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/09 04:19:08 by bogunlan         ###   ########.fr       */
+/*   Updated: 2023/06/07 18:02:21 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ int	main(int argc, char *argv[])
 	if (!stacks || !pswap)
 		return (0);
 	if (argc < 2)
+	{
+		ft_putstr_fd("Usage: ./push_swap ARGS\n", STDOUT_FILENO);
 		return (EXIT_SUCCESS);
+	}
 	if (!init_stacks(stacks))
 		return (EXIT_SUCCESS);
 	parse_args(stacks, argc, argv);

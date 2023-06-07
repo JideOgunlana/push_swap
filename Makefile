@@ -38,7 +38,7 @@ $(NAME): $(MAIN_OBJ) $(UTILS_OBJS) $(BONUS_OBJ)
 	@cp ./includes/libft/libft.a ./
 	@$(CC) $(CFLAGS) $(MAIN_OBJ) $(UTILS_OBJS) ./libft.a -o $(NAME)
 	@$(CC) $(CFLAGS) $(BONUS_OBJ) $(UTILS_OBJS) ./libft.a ./includes/gnl/get_next_line.c ./includes/gnl/get_next_line_utils.c -o bonus/$(BONUS_NAME)
-	@printf "\033[1;32mCOMPILED\n"
+	@printf "$(NAME) \033[1;32mCOMPILED\n"
 
 clean:
 	@make fclean -C ./includes/libft
