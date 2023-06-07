@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 22:36:50 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/11 11:55:21 by bogunlan         ###   ########.fr       */
+/*   Updated: 2023/06/07 06:56:46 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
+
+#define COMMAND "Enter a valid command (use ctrl+D when you are are done sorting) : \n"
 
 void	invalid_instruction(void)
 {
@@ -66,18 +68,17 @@ void	checker(t_stacks *stacks, char *line)
 	{
 		if (ft_strncmp(line, "\n", 2) == 0)
 		{
-			if (stacks->stack_b->size > 0)
-			{
-				checker_err_mess();
-				exit(EXIT_SUCCESS);
-			}
 			is_stack_sorted(stacks);
 			free(line);
 			checker_clean_up(stacks);
 			exit(EXIT_SUCCESS);
 		}
 		read_instruction(stacks, line);
+		display(stacks->stack_a);
+		print_stack(stacks->stack_b);
+		write(STDOUT_FILENO, "\033[1;32mCommand executed succesfully\e[0m\n", 41);
 		free(line);
+		write(STDOUT_FILENO, COMMAND, ft_strlen(COMMAND));
 		line = get_next_line(0);
 	}
 	is_stack_sorted(stacks);
@@ -95,6 +96,9 @@ int	main(int argc, char *argv[])
 		return (EXIT_SUCCESS);
 	checker_init_stacks(stacks);
 	parse_args(stacks, argc, argv);
+	display(stacks->stack_a);
+	print_stack(stacks->stack_b);
+	write(STDOUT_FILENO, COMMAND, ft_strlen(COMMAND));
 	line = get_next_line(0);
 	checker(stacks, line);
 	checker_clean_up(stacks);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_queue.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 18:33:50 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/09 20:39:41 by bogunlan         ###   ########.fr       */
+/*   Updated: 2023/06/07 06:51:25 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,18 @@ void	display(t_queue *stack_a)
 	if (stack_a->size == 0)
 		return ;
 	head = stack_a->front;
-	ft_putstr_fd("\x1b[1;36m", STDOUT_FILENO);
-	ft_putstr_fd("-------------------------------", STDOUT_FILENO);
-	ft_putstr_fd("\x1B[0m\n", STDOUT_FILENO);
+
 	ft_putstr_fd("Items in Stack A\n", STDOUT_FILENO);
+	ft_putstr_fd("\x1b[1;36m", STDOUT_FILENO);
+	ft_putstr_fd("-", STDOUT_FILENO);
+	ft_putstr_fd("\x1B[0m\n", STDOUT_FILENO);
 	while (head)
 	{
 		ft_putnbr_fd(head->item, STDOUT_FILENO);
 		ft_putchar_fd('\n', STDOUT_FILENO);
 		head = head->next;
 	}
+	ft_putstr_fd("\x1b[1;36m", STDOUT_FILENO);
+	ft_putstr_fd("-", STDOUT_FILENO);
+	ft_putstr_fd("\x1B[0m\n", STDOUT_FILENO);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 02:11:37 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/09 21:10:14 by bogunlan         ###   ########.fr       */
+/*   Updated: 2023/06/07 06:42:23 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	checker_err_mess(void)
 
 void	is_stack_sorted(t_stacks *stacks)
 {
-	if (is_ordered(stacks->stack_a))
+	if (is_ordered(stacks->stack_a) && stacks->stack_b->size < 1 )
 		checker_pass_mess();
 	else
 		checker_err_mess();

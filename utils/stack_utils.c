@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 18:36:27 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/10/09 04:10:03 by bogunlan         ###   ########.fr       */
+/*   Updated: 2023/06/07 06:53:10 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@ void	print_stack(t_stack *s)
 
 	head = s->s_nodes;
 	ft_putstr_fd("\nItems in Stack B\n", STDOUT_FILENO);
+	ft_putstr_fd("\x1b[1;33m", STDOUT_FILENO);
+	ft_putstr_fd("-\n", STDOUT_FILENO);
+	ft_putstr_fd("\x1B[0m", STDOUT_FILENO);
 	if (is_empty(s))
 		ft_putstr_fd("Stack is empty\n", STDOUT_FILENO);
 	while (head != NULL)
@@ -27,7 +30,7 @@ void	print_stack(t_stack *s)
 		head = head->next;
 	}
 	ft_putstr_fd("\x1b[1;33m", STDOUT_FILENO);
-	ft_putstr_fd("-------------------------------\n\n\n", STDOUT_FILENO);
+	ft_putstr_fd("-\n", STDOUT_FILENO);
 	ft_putstr_fd("\x1B[0m\n", STDOUT_FILENO);
 }
 
