@@ -1,7 +1,5 @@
 # PUSH SWAP
 
-<br/>
-
 ## Summary
 ### Data Sorting using two stacks a and b
 > *This project focuses on sorting data efficiently on a stack using a limited set of instructions. The main objective is to achieve the lowest possible number of push_swap actions while manipulating various algorithms. The project requires careful consideration and selection of the most appropriate solution out of several possibilities to optimize the data sorting process.*
@@ -83,7 +81,7 @@ a b
 
 ## Tasks include
 
-1. Implementing a program that sorts an array of integers using the least amount of moves with push_swap operations.
+1. Implementing a program that sorts an array of non-repeating integers using the least amount of moves with push_swap operations.
 2. Implementing a checker program that verifies the operations performed to sort an array of integers using push_swap operations is valid.
 
 <br/>
@@ -111,6 +109,8 @@ You can compile and run the program by using these commands
 
 ``` bash
 make; ./push_swap 3 2 1;
+
+./push_swap "2 3 4" "1" "5" 6 7 8;
 ```
 
 ### Using the checker
